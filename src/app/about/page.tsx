@@ -12,7 +12,7 @@ const About = () => {
   
   useEffect(() => {
     // About page content has been moved to the homepage, so redirect there
-    navigate('/', { replace: true });
+    router.push('/', { replace: true });
   }, [navigate]);
 
   // This renders temporarily during redirect

@@ -33,7 +33,7 @@ const HeroActions = () => {
       cta_text: 'Schedule Consultation'
     });
     
-    navigate('/contact');
+    router.push('/contact');
   };
 
   return (

@@ -10,7 +10,7 @@ const AboutHero = () => {
   const navigate = useRouter();
   
   const handleBookConsultation = () => {
-    navigate('/contact');
+    router.push('/contact');
   };
   
   return (

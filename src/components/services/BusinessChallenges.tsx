@@ -25,7 +25,7 @@ const BusinessChallenges = () => {
       cta_location: 'business_challenges_section'
     });
     
-    navigate('/contact');
+    router.push('/contact');
   };
 
   return (

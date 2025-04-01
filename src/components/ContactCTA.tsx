@@ -21,7 +21,7 @@ const ContactCTA = () => {
       cta_text: 'Book a Free Consultation',
       is_norwegian: isNorwegian
     });
-    navigate('/contact');
+    router.push('/contact');
   };
 
   const handleContactClick = () => {
@@ -33,7 +33,7 @@ const ContactCTA = () => {
       cta_text: 'Contact Me',
       is_norwegian: isNorwegian
     });
-    navigate('/contact');
+    router.push('/contact');
   };
 
   return (

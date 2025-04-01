@@ -42,7 +42,7 @@ const PainPoints = () => {
       cta_location: 'pain_points_section'
     });
     
-    navigate('/contact');
+    router.push('/contact');
   };
 
   return (

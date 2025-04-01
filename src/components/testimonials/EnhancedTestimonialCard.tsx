@@ -1,51 +1,32 @@
-import React from 'react';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { motion } from 'framer-motion';
+"use client";
+
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
+interface Author {
+  name: string;
+  image?: string;
+  title?: string;
+}
 
 interface TestimonialProps {
-  author: {
-    name: string;
-    title?: string;
-    image?: string;
-  };
   content: string;
-  rating?: number;
+  author?: Author;
   className?: string;
 }
 
-const EnhancedTestimonialCard: React.FC<TestimonialProps> = ({
-  author,
-  content,
-  rating,
-  className = ''
-}) => {
+export function EnhancedTestimonialCard({ content, author, className }: TestimonialProps) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
-    >
-      <Card className="h-full flex flex-col bg-white/50 backdrop-blur-sm border-primary/10 shadow-lg hover:shadow-xl transition-shadow">
-        <CardContent className="pt-6 pb-2 flex-grow">
-          {rating && (
-            <div className="flex mb-2">
-              {[...Array(5)].map((_, i) => (
-                <span
-                  key={i}
-                  className={`text-lg ${
-                    i < rating ? 'text-yellow-400' : 'text-gray-300'
-                  }`}
-                >
-                  ★
-                </span>
-              ))}
-            </div>
-          )}
-          <p className="text-gray-700">{content}</p>
-        </CardContent>
-        <CardFooter className="border-t border-primary/10 pt-4">
-          <div className="flex items-center space-x-4">
-            {author && author.image && (
-              <div className="relative w-10 h-10 rounded-full overflow-hidden">
+    <Card className={cn("relative overflow-hidden p-6", className)}>
+      <div className="relative z-20 space-y-4">
+        <blockquote className="text-lg leading-relaxed">
+          "{content}"
+        </blockquote>
+        {author && (
+          <figcaption className="flex items-center space-x-4">
+            {author.image && (
+              <div className="relative h-10 w-10 overflow-hidden rounded-full">
                 <img
                   src={author.image}
                   alt={author.name}
@@ -53,19 +34,15 @@ const EnhancedTestimonialCard: React.FC<TestimonialProps> = ({
                 />
               </div>
             )}
-            {author && (
-              <div>
-                <h4 className="font-medium text-gray-900">{author.name}</h4>
-                {author.title && (
-                  <p className="text-sm text-gray-500">{author.title}</p>
-                )}
-              </div>
-            )}
-          </div>
-        </CardFooter>
-      </Card>
-    </motion.div>
+            <div className="text-sm">
+              <div className="font-medium">{author.name}</div>
+              {author.title && (
+                <div className="text-gray-600 dark:text-gray-400">{author.title}</div>
+              )}
+            </div>
+          </figcaption>
+        )}
+      </div>
+    </Card>
   );
-};
-
-export default EnhancedTestimonialCard;
+}

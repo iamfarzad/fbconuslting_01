@@ -27,7 +27,7 @@ const NorwegianPainPoints: React.FC<NorwegianPainPointsProps> = ({ isVisible }) 
       country: 'Norway'
     });
     
-    navigate('/contact');
+    router.push('/contact');
   };
 
   const containerVariants = {

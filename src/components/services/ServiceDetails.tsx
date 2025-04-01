@@ -85,7 +85,7 @@ const ServiceDetails = () => {
       cta_text: ctaText
     });
     
-    navigate('/contact');
+    router.push('/contact');
   };
 
   return (

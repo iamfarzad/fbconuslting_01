@@ -17,7 +17,7 @@ const BackgroundCTA = () => {
       cta_location: 'background_section'
     });
     
-    navigate('/contact');
+    router.push('/contact');
   };
   
   return (

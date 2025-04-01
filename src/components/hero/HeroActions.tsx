@@ -17,7 +17,7 @@ export const HeroActions: React.FC = () => {
       cta_text: 'Book Free Consultation'
     });
     
-    navigate('/contact');
+    router.push('/contact');
   };
   
   return (

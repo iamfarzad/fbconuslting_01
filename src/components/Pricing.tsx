@@ -57,7 +57,7 @@ const Pricing = () => {
       cta_text: cta
     });
     
-    navigate('/contact');
+    router.push('/contact');
   };
   
   return (

@@ -40,7 +40,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({
     });
     
     // Navigate to the contact page
-    navigate('/contact');
+    router.push('/contact');
   };
   
   return (

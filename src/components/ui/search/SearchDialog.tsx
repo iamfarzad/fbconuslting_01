@@ -42,7 +42,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
 
   const handleResultClick = (result: SearchResultItem) => {
     onOpenChange(false);
-    navigate(result.url);
+    router.push(result.url);
   };
 
   return (
