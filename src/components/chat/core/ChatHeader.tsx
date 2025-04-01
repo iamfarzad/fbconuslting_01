@@ -2,7 +2,7 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ConnectionStatus } from './ConnectionStatus';
+import { ConnectionStatus } from '@/components/chat/core/ConnectionStatus';
 
 interface ChatHeaderProps {
   title?: string;

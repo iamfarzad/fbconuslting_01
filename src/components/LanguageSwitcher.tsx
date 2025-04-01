@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Globe } from 'lucide-react';
 

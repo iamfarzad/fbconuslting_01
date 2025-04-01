@@ -1,10 +1,10 @@
 import React from "react";
 import { HelmetProvider } from "react-helmet-async";
-import ErrorBoundaryWrapper from "./ErrorBoundaryWrapper";
-import ThemeProvider from "./ThemeProvider";
-import { LanguageProvider } from "../contexts/LanguageContext";
+import ErrorBoundaryWrapper from '@/components/ErrorBoundaryWrapper';
+import ThemeProvider from '@/components/ThemeProvider';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import { CopilotProvider } from "@/components/copilot/CopilotProvider";
-import { GeminiAPIProvider } from "../providers/GeminiAPIProvider";
+import { GeminiAPIProvider } from '@/providers/GeminiAPIProvider';
 
 interface ProvidersWrapperProps {
   children: React.ReactNode;

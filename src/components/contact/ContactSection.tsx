@@ -1,9 +1,9 @@
 
 import React from 'react';
 import PageHeader from '@/components/PageHeader';
-import ContactInfoCard from './ContactInfoCard';
-import ContactForm from './ContactForm';
-import BookingCalendarSection from './BookingCalendarSection';
+import ContactInfoCard from '@/components/contact/ContactInfoCard';
+import ContactForm from '@/components/contact/ContactForm';
+import BookingCalendarSection from '@/components/contact/BookingCalendarSection';
 import { trackEvent } from '@/services/analyticsService';
 
 const ContactSection = () => {

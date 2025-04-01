@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { services } from '@/data/servicesData';
-import BentoItem from './bento/BentoItem';
+import BentoItem from '@/components/bento/BentoItem';
 
 const ServicesList = () => {
   console.log("ServicesList rendering");

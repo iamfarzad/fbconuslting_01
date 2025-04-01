@@ -3,7 +3,7 @@ import React from 'react';
 import { Mic, X, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { AnimatedBars } from '../ui/AnimatedBars';
+import { AnimatedBars } from '@/components/copilot/ui/AnimatedBars';
 import { cn } from '@/lib/utils';
 
 interface VoicePanelProps {

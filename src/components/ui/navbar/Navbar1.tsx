@@ -1,9 +1,9 @@
 
 import React from "react";
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
-import { DesktopNavbar } from "./DesktopNavbar";
-import { MobileNavbar } from "./MobileNavbar";
-import { MenuItem } from "./MenuItem";
+import { DesktopNavbar } from '@/components/ui/navbar/DesktopNavbar';
+import { MobileNavbar } from '@/components/ui/navbar/MobileNavbar';
+import { MenuItem } from '@/components/ui/navbar/MenuItem';
 
 // Dark mode toggle interface
 interface DarkModeToggle {

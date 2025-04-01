@@ -3,9 +3,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import AnimatedText from '@/components/AnimatedText';
 import { Briefcase } from 'lucide-react';
-import { expertiseData } from './expertiseData';
-import ExpertiseCard from './ExpertiseCard';
-import BackgroundCTA from './BackgroundCTA';
+import { expertiseData } from '@/components/about/expertiseData';
+import ExpertiseCard from '@/components/about/ExpertiseCard';
+import BackgroundCTA from '@/components/about/BackgroundCTA';
 
 const BackgroundExperience = () => {
   return (

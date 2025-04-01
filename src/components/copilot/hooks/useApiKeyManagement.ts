@@ -9,7 +9,7 @@ export function useApiKeyManagement(
   propApiKey?: string, 
   contextApiKey?: string
 ) {
-  const envApiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const envApiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
   // Determine which API key to use (prop > context > env)
   const apiKey = useMemo(() => {

@@ -2,7 +2,7 @@
 "use client"
 
 import * as React from "react"
-import { useGeminiCopilot } from "./GeminiCopilotProvider"
+import { useGeminiCopilot } from '@/components/copilot/GeminiCopilotProvider'
 import { HeroChat } from "@/components/hero/HeroChat"
 import { cn } from "@/lib/utils"
 

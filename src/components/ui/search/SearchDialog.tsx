@@ -1,14 +1,13 @@
-
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { 
   Dialog, 
   DialogContent,
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog';
-import { SearchBar } from './SearchBar';
-import { SearchResults, SearchResultItem } from './SearchResults';
+import { SearchBar } from '@/components/ui/search/SearchBar';
+import { SearchResults, SearchResultItem } from '@/components/ui/search/SearchResults';
 import { searchContent, trackSearch } from '@/services/searchService';
 
 interface SearchDialogProps {
@@ -23,7 +22,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
   const [searchResults, setSearchResults] = useState<SearchResultItem[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);

@@ -1,59 +1,20 @@
+import { ChatMessage } from "@/types/chat";
 
-export interface Message {
-  role: 'user' | 'assistant' | 'system' | 'error';
-  content: string;
-  timestamp?: number;
+export interface GeminiReducerState {
+  messages: ChatMessage[];
+  isLoading: boolean;
+  chatError: string | null;
+  userInfo: any | null;
+  step?: string;
+  proposal?: any;
 }
 
-export interface WebSocketMessage {
-  type: 'text' | 'error' | 'connection' | 'audio' | 'vision_response';
-  content?: string;
-  status?: 'connected' | 'error';
-  error?: string;
-}
-
-export interface MessageHandler {
-  (data: string): void;
-}
-
-export interface VoiceConfig {
-  voice: string;
-  pitch?: number;
-  rate?: number;
-  volume?: number;
-}
-
-export interface ChatConfig {
-  temperature?: number;
-  maxTokens?: number;
-  topK?: number;
-  topP?: number;
-  voice?: VoiceConfig;
-}
-
-// Copilot Types
-export interface SpatialContext {
-  pageSection: string;
-  elementType: string;
-  interactionType: string;
-  userBehavior: string;
-  timestamp: number;
-}
-
-export interface CopilotConfig {
-  apiKey: string;
-  options: {
-    model: string;
-    temperature: number;
-    maxTokens: number;
-    initialMessages: Message[];
-    voice?: VoiceConfig;
-    spatialContext?: SpatialContext;
-    agentic?: {
-      proactiveAssistance: boolean;
-      learningEnabled: boolean;
-      contextAwareness: boolean;
-      behaviorPatterns: string[];
-    };
-  };
-}
+export type GeminiReducerAction = 
+  | { type: 'SET_MESSAGES'; payload: ChatMessage[] }
+  | { type: 'ADD_MESSAGE'; payload: ChatMessage }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'SET_USER_INFO'; payload: any }
+  | { type: 'SET_STEP'; payload: string }
+  | { type: 'SET_PROPOSAL'; payload: any }
+  | { type: 'RESET' };

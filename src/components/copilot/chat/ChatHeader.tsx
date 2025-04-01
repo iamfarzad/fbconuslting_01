@@ -1,51 +1,49 @@
 import React from 'react';
-import { Bot, X, Wifi, WifiOff, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { ChatHeaderProps } from '@/types/chat';
-// Update the import path to match where you actually created the component
-import { ConnectionStatusIndicator } from '../ui/ConnectionStatusIndicator';
 
-const ChatHeader: React.FC<ChatHeaderProps> = ({
-  title = 'AI Assistant',
+interface ChatHeaderProps {
+  title?: string;
+  subtitle?: string;
+  onClose?: () => void;
+  status?: 'connected' | 'connecting' | 'disconnected' | 'error';
+}
+
+const ChatHeader = ({
+  title = "AI Assistant",
   subtitle,
   onClose,
-  onClear,
-  hasMessages = false,
-  isConnected,
-  isConnecting
-}) => {
+  status = 'connected'
+}: ChatHeaderProps) => {
   return (
-    <div className="flex items-center justify-between p-4 border-b">
-      <div className="flex items-center space-x-3">
-        <Bot className="h-5 w-5 text-primary" />
-        <div>
-          <div className="flex items-center gap-2">
-            <h3 className="font-medium">{title}</h3>
-            {/* Update prop name to match what the component expects */}
-            {isConnected !== undefined && (
-              <ConnectionStatusIndicator 
-                isConnected={isConnected} 
-                isConnecting={isConnecting}
-              />
-            )}
-          </div>
-          {subtitle && (
-            <p className="text-xs text-muted-foreground">{subtitle}</p>
-          )}
+    <div className="flex justify-between items-center border-b pb-2 mb-4">
+      <div>
+        <h3 className="font-medium">{title}</h3>
+        {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
+      </div>
+      {status && (
+        <div className="flex items-center">
+          <span 
+            className={`w-2 h-2 rounded-full mr-2 ${
+              status === 'connected' ? 'bg-green-500' :
+              status === 'connecting' ? 'bg-yellow-500' :
+              status === 'error' ? 'bg-red-500' : 'bg-gray-500'
+            }`}
+          />
+          <span className="text-xs text-gray-500">
+            {status === 'connected' ? 'Connected' :
+             status === 'connecting' ? 'Connecting...' :
+             status === 'error' ? 'Error' : 'Disconnected'}
+          </span>
         </div>
-      </div>
-      <div className="flex items-center space-x-2">
-        {hasMessages && onClear && (
-          <Button variant="ghost" size="sm" onClick={onClear}>
-            Clear
-          </Button>
-        )}
-        {onClose && (
-          <Button variant="ghost" size="icon" onClick={onClose}>
-            <X className="h-4 w-4" />
-          </Button>
-        )}
-      </div>
+      )}
+      {onClose && (
+        <button 
+          onClick={onClose}
+          className="text-gray-500 hover:text-gray-700"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+      )}
     </div>
   );
 };

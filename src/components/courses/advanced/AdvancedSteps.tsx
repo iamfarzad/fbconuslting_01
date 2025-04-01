@@ -1,6 +1,6 @@
 
 import React from 'react';
-import AdvancedStepsList from './AdvancedStepsList';
+import AdvancedStepsList from '@/components/courses/advanced/AdvancedStepsList';
 
 const AdvancedSteps = () => {
   return <AdvancedStepsList />;

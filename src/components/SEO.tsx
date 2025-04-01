@@ -1,107 +1,45 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React from "react";
+import Head from "next/head";
 
 interface SEOProps {
   title: string;
-  description: string;
+  description?: string;
   canonicalUrl?: string;
   ogImage?: string;
-  ogType?: 'website' | 'article';
-  structuredData?: Record<string, any> | Record<string, any>[];
-  keywords?: string;
-  author?: string;
-  language?: string;
+  ogType?: "website" | "article";
 }
 
-const SEO: React.FC<SEOProps> = ({
-  title = 'F.B Consulting',
-  description = 'AI Automation Consulting Services',
+export const SEO: React.FC<SEOProps> = ({
+  title,
+  description = "AI consulting, education, and digital solutions for businesses.",
   canonicalUrl,
-  ogImage = '/og-image.png',
-  ogType = 'website',
-  structuredData,
-  keywords = 'AI, Automation, Consulting',
-  author = 'AI Automation Consultant',
-  language = 'en',
+  ogImage = "/images/og-image.jpg",
+  ogType = "website",
 }) => {
-  // Use a try-catch block to handle potential errors with window access
-  let siteUrl = 'https://fbconsulting.com';
-  let pageUrl = canonicalUrl || siteUrl;
-  
-  try {
-    if (typeof window !== 'undefined' && window.location) {
-      siteUrl = window.location.origin;
-      pageUrl = canonicalUrl || window.location.href;
-    }
-  } catch (error) {
-    console.error('Error accessing window.location:', error);
-  }
-  
-  const imageUrl = ogImage ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`) : `${siteUrl}/og-image.png`;
-  
-  // Safely handle structured data
-  let fullStructuredData = [];
-  try {
-    // Default organization structured data to be merged with page-specific data
-    const organizationSchema = {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "@id": `${siteUrl}/#organization`,
-      "name": "F.B Consulting",
-      "url": siteUrl,
-      "logo": `${siteUrl}/og-image.png`,
-      "description": "AI automation consulting services for businesses looking to reduce costs and increase efficiency",
-      "sameAs": [
-        "https://linkedin.com/in/yourprofile", 
-        "https://twitter.com/yourprofile"
-      ]
-    };
-
-    // Combine with page-specific structured data if provided
-    if (Array.isArray(structuredData)) {
-      fullStructuredData = [organizationSchema, ...structuredData];
-    } else if (structuredData) {
-      fullStructuredData = [organizationSchema, structuredData];
-    } else {
-      fullStructuredData = [organizationSchema];
-    }
-  } catch (error) {
-    console.error('Error processing structured data:', error);
-    fullStructuredData = [];
-  }
+  const siteTitle = title ? `${title} | FB Consulting` : "FB Consulting";
   
   return (
-    <Helmet>
-      {/* Basic meta tags */}
-      <title>{title}</title>
+    <Head>
+      <title>{siteTitle}</title>
       <meta name="description" content={description} />
-      <link rel="canonical" href={pageUrl} />
-      {keywords && <meta name="keywords" content={keywords} />}
-      {author && <meta name="author" content={author} />}
-      {language && <html lang={language} />}
-    
-      {/* OpenGraph tags */}
-      <meta property="og:title" content={title} />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/favicon.ico" />
+      
+      {/* Open Graph */}
+      <meta property="og:title" content={siteTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:url" content={pageUrl} />
       <meta property="og:type" content={ogType} />
-      <meta property="og:image" content={imageUrl} />
-      <meta property="og:site_name" content="F.B Consulting" />
+      {ogImage && <meta property="og:image" content={ogImage} />}
+      {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
       
-      {/* Twitter Card tags */}
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content={siteTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={imageUrl} />
+      {ogImage && <meta name="twitter:image" content={ogImage} />}
       
-      {/* Structured data */}
-      {fullStructuredData && (
-        <script type="application/ld+json">
-          {JSON.stringify(fullStructuredData)}
-        </script>
-      )}
-    </Helmet>
+      {/* Canonical URL */}
+      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    </Head>
   );
 };
-
-export default SEO;

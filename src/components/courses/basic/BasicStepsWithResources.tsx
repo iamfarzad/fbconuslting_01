@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
-import BasicStepsList from './BasicStepsList';
-import BasicResourcesSidebar from './BasicResourcesSidebar';
+import BasicStepsList from '@/components/courses/basic/BasicStepsList';
+import BasicResourcesSidebar from '@/components/courses/basic/BasicResourcesSidebar';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { motion } from 'framer-motion';
 

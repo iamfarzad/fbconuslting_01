@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import HeroBackground from './hero/HeroBackground';
-import HeroContent from './hero/HeroContent';
-import HeroAnimation from './hero/HeroAnimation';
-import ScrollIndicator from './hero/ScrollIndicator';
-import LanguageSwitcher from '../LanguageSwitcher';
+import HeroBackground from '@/components/services/hero/HeroBackground';
+import HeroContent from '@/components/services/hero/HeroContent';
+import HeroAnimation from '@/components/services/hero/HeroAnimation';
+import ScrollIndicator from '@/components/services/hero/ScrollIndicator';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 interface ServicesHeroProps {
   className?: string;

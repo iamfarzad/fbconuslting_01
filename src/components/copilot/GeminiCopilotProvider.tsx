@@ -1,101 +1,163 @@
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { useGemini } from './providers/GeminiProvider';
-import { Message } from '../../types/message';
+import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import { ChatMessage } from '@/types/chat';
 
-// Define the context type
-interface GeminiCopilotContextType {
-  messages: Message[];
-  sendMessage: (content: string) => void;
+export interface GeminiContextType {
+  messages: ChatMessage[];
   isLoading: boolean;
-  isListening: boolean;
-  transcript: string;
-  toggleListening: () => void;
-  generateAndPlayAudio: (text: string) => void;
-  clearMessages: () => void;
+  error: string | null;
+  userInfo: any | null;
+  step?: string;
+  proposal?: any;
+  isRecording?: boolean;
+  stopAudio?: () => void;
+  sendMessage: (message: string) => Promise<void>;
+  setUserInfo: (info: any) => void;
+  setStep: (step: string) => void;
+  setProposal: (proposal: any) => void;
+  resetConversation: () => void;
 }
 
-// Create the context
-const GeminiCopilotContext = createContext<GeminiCopilotContextType | null>(null);
-
-// Hook to use the context
-export const useGeminiCopilot = () => {
-  const context = useContext(GeminiCopilotContext);
-  if (!context) {
-    throw new Error('useGeminiCopilot must be used within a GeminiCopilotProvider');
-  }
-  return context;
+const defaultContext: GeminiContextType = {
+  messages: [],
+  isLoading: false,
+  error: null,
+  userInfo: null,
+  step: undefined,
+  proposal: undefined,
+  isRecording: false,
+  stopAudio: () => {},
+  sendMessage: async () => {},
+  setUserInfo: () => {},
+  setStep: () => {},
+  setProposal: () => {},
+  resetConversation: () => {}
 };
+
+const GeminiCopilotContext = createContext<GeminiContextType>(defaultContext);
 
 interface GeminiCopilotProviderProps {
   children: ReactNode;
 }
 
-export function GeminiCopilotProvider({ children }: GeminiCopilotProviderProps) {
-  // Use Gemini Provider
-  const {
-    messages,
-    sendMessage: geminiSendMessage,
-    isProcessing: isLoading,
-    clearMessages,
-    startRecording,
-    stopRecording,
-    isRecording,
-    stopAudio
-  } = useGemini();
+type State = {
+  messages: ChatMessage[];
+  isLoading: boolean;
+  error: string | null;
+  userInfo: any | null;
+  step?: string;
+  proposal?: any;
+};
 
-  // Voice state
-  const [isListening, setIsListening] = useState(false);
-  const [transcript, setTranscript] = useState('');
+type Action = 
+  | { type: 'SET_MESSAGES'; payload: ChatMessage[] }
+  | { type: 'ADD_MESSAGE'; payload: ChatMessage }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'SET_USER_INFO'; payload: any }
+  | { type: 'SET_STEP'; payload: string }
+  | { type: 'SET_PROPOSAL'; payload: any }
+  | { type: 'RESET' };
 
-  // Toggle voice input
-  const toggleListening = useCallback(() => {
-    if (isListening) {
-      stopRecording();
-      setTranscript('');
-    } else {
-      startRecording();
-    }
-    setIsListening(prev => !prev);
-  }, [isListening, startRecording, stopRecording]);
+const initialState: State = {
+  messages: [],
+  isLoading: false,
+  error: null,
+  userInfo: null
+};
 
-  // Generate and play audio using the consolidated audio functionality
-  const generateAndPlayAudio = useCallback((text: string) => {
-    geminiSendMessage({
-      type: 'text_message',
-      text,
-      enableTTS: true
-    });
-  }, [geminiSendMessage]);
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'SET_MESSAGES':
+      return { ...state, messages: action.payload };
+    case 'ADD_MESSAGE':
+      return { ...state, messages: [...state.messages, action.payload] };
+    case 'SET_LOADING':
+      return { ...state, isLoading: action.payload };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload };
+    case 'SET_USER_INFO':
+      return { ...state, userInfo: action.payload };
+    case 'SET_STEP':
+      return { ...state, step: action.payload };
+    case 'SET_PROPOSAL':
+      return { ...state, proposal: action.payload };
+    case 'RESET':
+      return initialState;
+    default:
+      return state;
+  }
+}
 
-  // Wrapper for sendMessage to handle voice input
-  const sendMessage = useCallback((content: string) => {
-    if (content.trim()) {
-      geminiSendMessage({
-        type: 'text_message',
-        text: content,
-        enableTTS: true
+export const GeminiCopilotProvider: React.FC<GeminiCopilotProviderProps> = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  
+  const sendMessage = async (message: string) => {
+    if (!message.trim()) return;
+    
+    try {
+      dispatch({ type: 'SET_LOADING', payload: true });
+      dispatch({ type: 'SET_ERROR', payload: null });
+      
+      const userMessage: ChatMessage = {
+        id: Date.now().toString(),
+        role: 'user',
+        content: message,
+        timestamp: Date.now()
+      };
+      
+      dispatch({ type: 'ADD_MESSAGE', payload: userMessage });
+      
+      // Simulate response
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      const assistantMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: `This is a simulated response to: "${message}"`,
+        timestamp: Date.now()
+      };
+      
+      dispatch({ type: 'ADD_MESSAGE', payload: assistantMessage });
+    } catch (error) {
+      dispatch({ 
+        type: 'SET_ERROR', 
+        payload: error instanceof Error ? error.message : 'Failed to send message' 
       });
-      // Clear transcript if it was set
-      if (transcript) {
-        setTranscript('');
-      }
+    } finally {
+      dispatch({ type: 'SET_LOADING', payload: false });
     }
-  }, [geminiSendMessage, transcript]);
-
-  const value: GeminiCopilotContextType = {
-    messages,
-    sendMessage,
-    isLoading,
-    isListening,
-    transcript,
-    toggleListening,
-    generateAndPlayAudio,
-    clearMessages
   };
-
+  
+  const setUserInfo = (info: any) => {
+    dispatch({ type: 'SET_USER_INFO', payload: info });
+  };
+  
+  const setStep = (step: string) => {
+    dispatch({ type: 'SET_STEP', payload: step });
+  };
+  
+  const setProposal = (proposal: any) => {
+    dispatch({ type: 'SET_PROPOSAL', payload: proposal });
+  };
+  
+  const resetConversation = () => {
+    dispatch({ type: 'RESET' });
+  };
+  
   return (
-    <GeminiCopilotContext.Provider value={value}>
+    <GeminiCopilotContext.Provider value={{
+      ...state,
+      isRecording: false,
+      stopAudio: () => {},
+      sendMessage,
+      setUserInfo,
+      setStep,
+      setProposal,
+      resetConversation
+    }}>
       {children}
     </GeminiCopilotContext.Provider>
   );
-}
+};
+
+export const useGeminiCopilot = () => useContext(GeminiCopilotContext);

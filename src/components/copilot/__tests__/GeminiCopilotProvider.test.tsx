@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { GeminiCopilotProvider, useGeminiCopilot } from '../GeminiCopilotProvider';
+import { GeminiCopilotProvider, useGeminiCopilot } from '@/components/copilot/GeminiCopilotProvider';
 
 const TestComponent = () => {
   const { isListening, toggleListening, transcript, voiceError, messages, sendMessage, isPlaying, progress, stopAudio, generateAndPlayAudio, step, setStep, userInfo, setUserInfo, isLoading, chatError, clearMessages, clearStorage, proposal, audio, resetConversation, generateProposal, sendProposal } = useGeminiCopilot();

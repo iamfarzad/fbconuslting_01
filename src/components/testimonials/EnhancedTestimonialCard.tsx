@@ -1,68 +1,66 @@
-"use client";
-
 import React from 'react';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { MotionCard, MotionCardContent, MotionCardFooter } from '@/components/ui/motion-card';
-import { Star, User } from 'lucide-react';
-import { Testimonial } from '@/types/blog';
 
-interface EnhancedTestimonialCardProps {
-  testimonial: Testimonial;
-  index: number;
+interface TestimonialProps {
+  author: {
+    name: string;
+    title?: string;
+    image?: string;
+  };
+  content: string;
+  rating?: number;
+  className?: string;
 }
 
-const EnhancedTestimonialCard: React.FC<EnhancedTestimonialCardProps> = ({ testimonial, index }) => {
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }).map((_, i) => (
-      <Star
-        key={i}
-        className={`h-4 w-4 ${
-          i < rating ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'
-        }`}
-      />
-    ));
-  };
-
+const EnhancedTestimonialCard: React.FC<TestimonialProps> = ({
+  author,
+  content,
+  rating,
+  className = ''
+}) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="h-full"
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.2 }}
     >
       <Card className="h-full flex flex-col bg-white/50 backdrop-blur-sm border-primary/10 shadow-lg hover:shadow-xl transition-shadow">
         <CardContent className="pt-6 pb-2 flex-grow">
-          <motion.div 
-            className="flex mb-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 + index * 0.1 }}
-          >
-            {renderStars(testimonial.rating)}
-          </motion.div>
-          <blockquote className="text-lg italic text-muted-foreground">
-            "{testimonial.content}"
-          </blockquote>
+          {rating && (
+            <div className="flex mb-2">
+              {[...Array(5)].map((_, i) => (
+                <span
+                  key={i}
+                  className={`text-lg ${
+                    i < rating ? 'text-yellow-400' : 'text-gray-300'
+                  }`}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+          )}
+          <p className="text-gray-700">{content}</p>
         </CardContent>
         <CardFooter className="border-t border-primary/10 pt-4">
-          <div className="flex items-center gap-3">
-            {testimonial.avatar ? (
-              <img
-                src={testimonial.avatar}
-                alt={testimonial.name}
-                className="w-10 h-10 rounded-full object-cover border border-primary/20"
-              />
-            ) : (
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <User className="w-5 h-5 text-primary" />
+          <div className="flex items-center space-x-4">
+            {author && author.image && (
+              <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                <img
+                  src={author.image}
+                  alt={author.name}
+                  className="object-cover"
+                />
               </div>
             )}
-            <div>
-              <div className="font-medium text-foreground">{testimonial.name}</div>
-              <div className="text-sm text-muted-foreground">
-                {testimonial.role} at {testimonial.company}
+            {author && (
+              <div>
+                <h4 className="font-medium text-gray-900">{author.name}</h4>
+                {author.title && (
+                  <p className="text-sm text-gray-500">{author.title}</p>
+                )}
               </div>
-            </div>
+            )}
           </div>
         </CardFooter>
       </Card>

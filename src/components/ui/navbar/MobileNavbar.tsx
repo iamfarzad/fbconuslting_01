@@ -9,9 +9,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Accordion } from "@/components/ui/accordion";
-import { MenuItem } from "./MenuItem";
-import { renderMobileMenuItem } from "./MobileMenuItem";
-import { MobileDarkModeToggle, DarkModeToggleProps } from "./DarkModeToggle";
+import { MenuItem } from '@/components/ui/navbar/MenuItem';
+import { renderMobileMenuItem } from '@/components/ui/navbar/MobileMenuItem';
+import { MobileDarkModeToggle, DarkModeToggleProps } from '@/components/ui/navbar/DarkModeToggle';
 import { SearchButton } from "@/components/ui/search/SearchButton";
 import { SearchBar } from "@/components/ui/search/SearchBar";
 import { Logo3D } from "@/components/3d/Logo3D";

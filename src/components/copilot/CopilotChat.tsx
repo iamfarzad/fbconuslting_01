@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
-import { Card, CardHeader } from '../ui/card';
+import { Card, CardHeader } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import ChatHeader from './chat/ChatHeader';
-import ChatMessages from './chat/ChatMessages';
-import { Button } from '../ui/button';
+import ChatHeader from '@/components/copilot/chat/ChatHeader';
+import ChatMessages from '@/components/copilot/chat/ChatMessages';
+import { Button } from '@/components/ui/button';
 import { Send } from 'lucide-react';
-import { Textarea } from '../ui/textarea';
-import ErrorDisplay from './chat/ErrorDisplay';
-import { useGemini } from './providers/GeminiProvider';
+import { Textarea } from '@/components/ui/textarea';
+import ErrorDisplay from '@/components/copilot/chat/ErrorDisplay';
+import { useGemini } from '@/components/copilot/providers/GeminiProvider';
 
 interface CopilotChatProps {
   apiKey?: string;

@@ -4,8 +4,8 @@
 import React, { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { UnifiedChat } from "../chat/UnifiedChat";
-import UnifiedFullScreenChat from "../chat/UnifiedFullScreenChat";
+import { UnifiedChat } from '@/components/chat/UnifiedChat';
+import UnifiedFullScreenChat from '@/components/chat/UnifiedFullScreenChat';
 
 interface AIChatInputProps {
   placeholderText?: string;

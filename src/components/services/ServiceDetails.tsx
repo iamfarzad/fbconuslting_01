@@ -1,13 +1,12 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, Calendar } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/services/analyticsService';
 
 const ServiceDetails = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   const services = [
     {

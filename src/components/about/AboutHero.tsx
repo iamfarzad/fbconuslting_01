@@ -1,14 +1,13 @@
-
 import React from 'react';
 import AnimatedText from '@/components/AnimatedText';
 import { Button } from '@/components/ui/button';
 import DotPattern from '@/components/ui/dot-pattern';
 import { Calendar, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 const AboutHero = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   const handleBookConsultation = () => {
     navigate('/contact');

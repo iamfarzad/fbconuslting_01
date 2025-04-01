@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { Workflow, ArrowRight, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/services/analyticsService';
@@ -8,7 +7,7 @@ import { motion } from 'framer-motion';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 const HeroActions = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   const handleExploreServices = () => {
     trackEvent({

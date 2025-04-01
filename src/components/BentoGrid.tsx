@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import BentoItem from './bento/BentoItem';
+import BentoItem from '@/components/bento/BentoItem';
 import { services } from '@/data/servicesData';
 
 const BentoGrid: React.FC = () => {

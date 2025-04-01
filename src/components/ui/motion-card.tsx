@@ -1,31 +1,41 @@
-"use client";
+"use client"
 
-import React from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
-import { Card, CardContent, CardFooter } from './card';
+import * as React from "react"
+import { motion } from "framer-motion"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./card"
+import { cn } from "@/lib/utils"
 
-interface MotionCardProps extends Omit<HTMLMotionProps<"div">, "children"> {
-  children: React.ReactNode;
+const MotionCard = motion(Card)
+
+export interface MotionCardProps extends React.ComponentProps<typeof Card> {
+  whileHover?: any
+  whileTap?: any
+  initial?: any
+  animate?: any
+  transition?: any
+  variants?: any
 }
 
-export const MotionCard = React.forwardRef<HTMLDivElement, MotionCardProps>(
-  ({ children, className, initial, animate, transition, whileHover, ...props }, ref) => {
+const CustomMotionCard = React.forwardRef<HTMLDivElement, MotionCardProps>(
+  ({ className, children, ...props }, ref) => {
     return (
-      <motion.div
+      <MotionCard
         ref={ref}
-        initial={initial}
-        animate={animate}
-        transition={transition}
-        whileHover={whileHover}
-        className={className}
+        className={cn("overflow-hidden", className)}
         {...props}
       >
-        <Card className="h-full">{children}</Card>
-      </motion.div>
-    );
+        {children}
+      </MotionCard>
+    )
   }
-);
-MotionCard.displayName = "MotionCard";
+)
+CustomMotionCard.displayName = "CustomMotionCard"
 
-export const MotionCardContent = CardContent;
-export const MotionCardFooter = CardFooter;
+export {
+  CustomMotionCard as MotionCard,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+}

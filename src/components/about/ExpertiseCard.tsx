@@ -1,6 +1,6 @@
 
 import React from 'react';
-import BulletPoint from './BulletPoint';
+import BulletPoint from '@/components/about/BulletPoint';
 import { motion } from 'framer-motion';
 import { Brain, Workflow, LineChart, Smartphone } from "lucide-react";
 

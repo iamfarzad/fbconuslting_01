@@ -1,5 +1,5 @@
 
-import type { ExpertiseCardProps } from "./ExpertiseCard";
+import type { ExpertiseCardProps } from '@/components/about/ExpertiseCard';
 
 // We'll use string identifiers instead of JSX in .ts files
 export const expertiseData: ExpertiseCardProps[] = [

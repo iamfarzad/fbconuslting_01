@@ -11,7 +11,7 @@ import {
   BasicStep8,
   BasicStep9,
   BasicStep10
-} from './steps';
+} from '@/components/courses/basic/steps';
 
 export {
   BasicStep1,

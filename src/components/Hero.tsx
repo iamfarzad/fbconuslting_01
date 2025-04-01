@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useGeminiSpeechRecognition } from '@/hooks/useGeminiSpeechRecognition';
 import { useGeminiInitialization } from '@/hooks/gemini/useGeminiInitialization';
-import { HeroContent } from './hero/HeroContent';
-import { HeroBackground } from './hero/HeroBackground';
+import { HeroContent } from '@/components/hero/HeroContent';
+import { HeroBackground } from '@/components/hero/HeroBackground';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);

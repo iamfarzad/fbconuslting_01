@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { useGemini } from './GeminiProvider'; // Use the main provider context
+import { useGemini } from '@/components/copilot/providers/GeminiProvider'; // Use the main provider context
 
 // Define the context type
 interface GeminiCopilotContextType {

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import ServiceSection from './ServiceSection';
+import ServiceSection from '@/components/services/ServiceSection';
 import PageHeader from '@/components/PageHeader';
 import { Bot, MessageSquare, Workflow, BarChart3, Code } from 'lucide-react';
 import DotPattern from '@/components/ui/dot-pattern';

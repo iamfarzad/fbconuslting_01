@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-menu";
-import { MenuItem, renderMenuItem } from "./MenuItem";
-import { DesktopDarkModeToggle, DarkModeToggleProps } from "./DarkModeToggle";
+import { MenuItem, renderMenuItem } from '@/components/ui/navbar/MenuItem';
+import { DesktopDarkModeToggle, DarkModeToggleProps } from '@/components/ui/navbar/DarkModeToggle';
 import { SearchButton } from "@/components/ui/search/SearchButton";
 import { Logo3D } from "@/components/3d/Logo3D";
 

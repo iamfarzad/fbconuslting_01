@@ -2,9 +2,9 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import TitleSection from './service-detail/TitleSection';
-import BenefitsList from './service-detail/BenefitsList';
-import ServiceImage from './service-detail/ServiceImage';
+import TitleSection from '@/components/service-detail/TitleSection';
+import BenefitsList from '@/components/service-detail/BenefitsList';
+import ServiceImage from '@/components/service-detail/ServiceImage';
 
 interface ServiceDetailProps {
   title: string;

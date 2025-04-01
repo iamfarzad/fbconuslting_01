@@ -17,7 +17,7 @@ export const useGeminiConfig = () => {
   // Load saved API key from localStorage if available
   useEffect(() => {
     // Check for environment variable
-    const envApiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const envApiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
     setHasEnvKey(!!envApiKey);
     if (envApiKey) {
       setEnvKeyValue(envApiKey);

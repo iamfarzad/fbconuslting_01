@@ -1,13 +1,12 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/services/analyticsService';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 export const HeroActions: React.FC = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   const handleConsultationClick = () => {
     trackEvent({

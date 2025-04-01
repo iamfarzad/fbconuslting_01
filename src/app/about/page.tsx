@@ -1,12 +1,14 @@
+"use client";
+
 
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const About = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   useEffect(() => {
     // About page content has been moved to the homepage, so redirect there

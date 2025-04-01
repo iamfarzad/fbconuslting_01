@@ -1,11 +1,19 @@
+import React from 'react';
 
-// Re-export toast components from parent file
-export { 
-  Toast, 
-  ToastProvider, 
-  ToastViewport 
-} from '../toast';
-export { ToastAction } from '../toast';
-export { ToastClose } from '../toast';
-export { ToastTitle } from '../toast';
-export { ToastDescription } from '../toast';
+interface ToastOptions {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: React.ReactNode;
+  variant?: "default" | "destructive";
+  duration?: number;
+}
+
+export const toast = (options: ToastOptions) => {
+  console.log('Toast:', options);
+  // In a real implementation, this would show a toast notification
+  return {
+    id: Date.now(),
+    dismiss: () => {},
+    update: (options: ToastOptions) => {}
+  };
+};

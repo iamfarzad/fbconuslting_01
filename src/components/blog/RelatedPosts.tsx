@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowRightIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
@@ -25,7 +24,7 @@ const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts }) => {
             <CardHeader>
               <CardTitle className="text-lg">
                 <Link 
-                  to={`/blog/${post.slug}`}
+                  href={`/blog/${post.slug}`}
                   className="hover:text-primary transition-colors"
                 >
                   {post.title}
@@ -35,7 +34,7 @@ const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts }) => {
             <CardFooter>
               <Button variant="ghost" asChild className="p-0 hover:bg-transparent">
                 <Link 
-                  to={`/blog/${post.slug}`}
+                  href={`/blog/${post.slug}`}
                   className="text-primary font-medium inline-flex items-center"
                 >
                   Read More <ArrowRightIcon className="ml-1 h-4 w-4" />

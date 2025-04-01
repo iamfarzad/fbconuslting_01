@@ -1,15 +1,14 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import AnimatedText from './AnimatedText';
-import { TiltedScroll, TiltedScrollItem } from './ui/tilted-scroll';
+import AnimatedText from '@/components/AnimatedText';
+import { TiltedScroll, TiltedScrollItem } from '@/components/ui/tilted-scroll';
 import { ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/services/analyticsService';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const PainPoints = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const { t, language } = useLanguage();
   
   // Combined pain points and solutions for more concise presentation

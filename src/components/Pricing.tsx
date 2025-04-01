@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
-import AnimatedText from './AnimatedText';
-import { useNavigate } from 'react-router-dom';
+import AnimatedText from '@/components/AnimatedText';
+import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/services/analyticsService';
 
 const pricingData = [
@@ -47,7 +46,7 @@ const pricingData = [
 ];
 
 const Pricing = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   const handlePricingCTA = (plan: string, cta: string) => {
     trackEvent({

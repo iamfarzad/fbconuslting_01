@@ -1,6 +1,6 @@
 
 import React from 'react';
-import AnimatedText from '../AnimatedText';
+import AnimatedText from '@/components/AnimatedText';
 
 interface TitleSectionProps {
   title: string;

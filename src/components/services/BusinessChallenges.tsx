@@ -1,13 +1,12 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import AnimatedText from '@/components/AnimatedText';
 import { Check, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/services/analyticsService';
 
 const BusinessChallenges = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   const challenges = [
     { problem: "Wasting time on manual tasks?", solution: "Automate to save 20+ hours per week" },

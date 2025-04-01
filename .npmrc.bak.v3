@@ -1,0 +1,6 @@
+registry=https://registry.npmjs.org/
+engine-strict=true
+legacy-peer-deps=true
+auto-install-peers=true
+strict-peer-dependencies=false
+resolution-mode=highest

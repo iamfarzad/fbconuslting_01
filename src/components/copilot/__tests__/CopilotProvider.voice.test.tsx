@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { render, screen, cleanup, waitFor } from '@testing-library/react';
-import { CopilotProvider } from '../CopilotProvider';
+import { CopilotProvider } from '@/components/copilot/CopilotProvider';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
 // Mock the speech synthesis
@@ -32,9 +31,14 @@ Object.defineProperty(window, 'speechSynthesis', {
 global.SpeechRecognition = vi.fn().mockImplementation(() => mockSpeechRecognition);
 global.webkitSpeechRecognition = vi.fn().mockImplementation(() => mockSpeechRecognition);
 
-// Mock the router since we're using useLocation
-vi.mock('react-router-dom', () => ({
-  useLocation: vi.fn().mockReturnValue({ pathname: '/' }),
+// Replace mock for react-router-dom
+vi.mock('next/navigation', () => ({
+  usePathname: vi.fn().mockReturnValue('/'),
+  useRouter: vi.fn().mockReturnValue({
+    push: vi.fn(),
+    replace: vi.fn(),
+    back: vi.fn()
+  })
 }));
 
 describe('CopilotProvider with voice features', () => {

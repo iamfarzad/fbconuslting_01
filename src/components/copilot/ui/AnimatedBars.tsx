@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import styles from './AnimatedBars.module.css';
+import styles from '@/components/copilot/ui/AnimatedBars.module.css';
 
 interface AnimatedBarsProps {
   isActive?: boolean;

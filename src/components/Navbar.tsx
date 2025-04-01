@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { ShadcnblocksNavbarDemo } from './ui/shadcnblocks-navbar-demo';
+import { ShadcnblocksNavbarDemo } from '@/components/ui/shadcnblocks-navbar-demo';
 
 const Navbar: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);

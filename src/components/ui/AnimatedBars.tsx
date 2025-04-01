@@ -1,6 +1,6 @@
 
 import React from 'react';
-import styles from './AnimatedBars.module.css';
+import styles from '@/components/ui/AnimatedBars.module.css';
 
 interface AnimatedBarsProps {
   isActive: boolean;

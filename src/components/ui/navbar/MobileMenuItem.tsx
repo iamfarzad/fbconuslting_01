@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { MenuItem } from "./MenuItem";
+import { MenuItem } from '@/components/ui/navbar/MenuItem';
 
 export const renderMobileMenuItem = (item: MenuItem) => {
   if (item.items) {

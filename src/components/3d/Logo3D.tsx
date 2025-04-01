@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, OrbitControls } from '@react-three/drei'
 import { Loader2 } from 'lucide-react'
-import ErrorBoundary3D from './ErrorBoundary3D'
+import ErrorBoundary3D from '@/components/3d/ErrorBoundary3D'
 import { Logo3DLoader } from '@/components/loaders/Logo3DLoader'
 
 function Model() {

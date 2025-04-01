@@ -5,8 +5,8 @@ import { Flag } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LocationGreeting from '@/components/LocationGreeting';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { HeroActions } from './HeroActions';
-import { HeroVoiceInput } from './HeroVoiceInput';
+import { HeroActions } from '@/components/hero/HeroActions';
+import { HeroVoiceInput } from '@/components/hero/HeroVoiceInput';
 
 interface HeroContentProps {
   chatInputValue: string;

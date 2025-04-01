@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { Bot, X } from 'lucide-react';
-import { AIChatInput } from '../ui/ai-chat';
+import { AIChatInput } from '@/components/ui/ai-chat';
 import { motion } from 'framer-motion';
-import { AnimatedBars } from '../ui/AnimatedBars';
+import { AnimatedBars } from '@/components/ui/AnimatedBars';
 
 interface MiniChatWindowProps {
   onClose: () => void;

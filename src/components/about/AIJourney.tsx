@@ -4,7 +4,7 @@ import AnimatedText from '@/components/AnimatedText';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { History } from 'lucide-react';
-import { Timeline } from '../ui/timeline';
+import { Timeline } from '@/components/ui/timeline';
 
 // Timeline data
 const timelineData = [

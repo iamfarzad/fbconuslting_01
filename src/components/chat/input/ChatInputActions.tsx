@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { SuggestionButton } from '../core/SuggestionButton';
-import { InputControls } from '../core/InputControls';
+import { SuggestionButton } from '@/components/chat/core/SuggestionButton';
+import { InputControls } from '@/components/chat/core/InputControls';
 
 interface ChatInputActionsProps {
   suggestedResponse: string | null;

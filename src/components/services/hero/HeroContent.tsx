@@ -1,8 +1,8 @@
 
 import React from 'react';
 import AnimatedText from '@/components/AnimatedText';
-import HeroBadge from './HeroBadge';
-import HeroActions from './HeroActions';
+import HeroBadge from '@/components/services/hero/HeroBadge';
+import HeroActions from '@/components/services/hero/HeroActions';
 
 const HeroContent = () => {
   return (

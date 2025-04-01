@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
-import { CopilotProvider } from '../CopilotProvider';
+import { CopilotProvider } from '@/components/copilot/CopilotProvider';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
 // Mock the Google GenAI adapter

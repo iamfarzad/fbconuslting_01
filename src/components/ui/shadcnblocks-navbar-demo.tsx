@@ -1,6 +1,6 @@
 
 import { Book, Sunset, Trees, Zap } from "lucide-react";
-import { Navbar1 } from "./navbar";
+import { Navbar1 } from '@/components/ui/navbar';
 
 // Define the dark mode toggle props
 interface DarkModeToggle {

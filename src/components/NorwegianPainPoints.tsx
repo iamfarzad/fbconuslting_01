@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Shield, BookOpen, Workflow, Flag } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/services/analyticsService';
-import AnimatedText from './AnimatedText';
+import AnimatedText from '@/components/AnimatedText';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -13,7 +12,7 @@ interface NorwegianPainPointsProps {
 }
 
 const NorwegianPainPoints: React.FC<NorwegianPainPointsProps> = ({ isVisible }) => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const { t, language } = useLanguage();
   
   // Only show for Norwegian language

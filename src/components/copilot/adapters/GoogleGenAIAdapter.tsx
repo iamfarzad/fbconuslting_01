@@ -1,109 +1,34 @@
-import { useEffect, useState } from 'react';
-import { GoogleGenAIConfig, initializeGoogleGenAI } from '@/services/copilot/googleGenAIAdapter';
-import useGeminiAPI from '@/hooks/useGeminiAPI';
+import React from 'react';
+import API_CONFIG from '@/config/apiConfig';
 
-/**
- * GoogleGenAIAdapter
- * 
- * A runtime adapter for Google GenAI (Gemini) to be used with CopilotKit.
- * This adapter handles the connection to Google's Gemini models and provides
- * the necessary configuration for CopilotKit to use these models.
- */
 export interface GoogleGenAIAdapterProps {
-  config?: Partial<GoogleGenAIConfig>;
-  onConfigReady?: (config: GoogleGenAIConfig) => void;
-  onError?: (error: Error) => void;
+  apiKey?: string;
+  children: React.ReactNode;
 }
 
-export const GoogleGenAIAdapter: React.FC<GoogleGenAIAdapterProps> = ({
-  config = {},
-  onConfigReady,
-  onError
+export const GoogleGenAIAdapter: React.FC<GoogleGenAIAdapterProps> = ({ 
+  apiKey = API_CONFIG.gemini.apiKey,
+  children 
 }) => {
-  const [adapterConfig, setAdapterConfig] = useState<GoogleGenAIConfig | null>(null);
-  const { apiKey } = useGeminiAPI();
-
-  useEffect(() => {
-    if (!apiKey) {
-      console.warn('Google GenAI API Key not found in context');
-      return;
-    }
-
-    try {
-      // Initialize the adapter with the API key from context and any provided config
-      const fullConfig = initializeGoogleGenAI({
-        apiKey,
-        ...config
-      });
-
-      setAdapterConfig(fullConfig);
-      
-      // Notify parent component that config is ready
-      if (onConfigReady) {
-        onConfigReady(fullConfig);
-      }
-
-      console.log('Google GenAI Adapter initialized successfully');
-    } catch (error) {
-      console.error('Failed to initialize Google GenAI Adapter', error);
-      if (onError && error instanceof Error) {
-        onError(error);
-      }
-    }
-  }, [apiKey, config, onConfigReady, onError]);
-
-  // This component doesn't render anything, it just sets up the adapter
-  return null;
+  return <>{children}</>;
 };
 
-/**
- * Custom hook to create a Google Generative AI adapter configuration for CopilotKit
- */
-export const useGoogleGenAIAdapter = (config?: Partial<GoogleGenAIConfig>) => {
-  const [adapterConfig, setAdapterConfig] = useState<GoogleGenAIConfig | null>(null);
-  const [error, setError] = useState<Error | null>(null);
-  const { apiKey } = useGeminiAPI();
+export interface GenerateResponseOptions {
+  prompt: string;
+  maxTokens?: number;
+  temperature?: number;
+  model?: string;
+}
 
-  useEffect(() => {
-    if (!apiKey) {
-      setError(new Error('Google GenAI API Key not found'));
-      return;
-    }
-
-    // Exit early if no API key is provided
-    if (!apiKey) {
-      setError(new Error('Google GenAI API Key not found'));
-      return;
-    }
-
-    try {
-      // Ensure API key is trimmed and validate it's not empty
-      const trimmedKey = apiKey.trim();
-      if (trimmedKey === '') {
-        setError(new Error('API key cannot be empty'));
-        return;
-      }
-
-      const fullConfig = initializeGoogleGenAI({
-        apiKey: trimmedKey,
-        ...config
-      });
-      
-      setAdapterConfig(fullConfig);
-      setError(null);
-    } catch (err) {
-      console.error('Error initializing Google GenAI Adapter', err);
-      if (err instanceof Error) {
-        setError(err);
-      } else {
-        setError(new Error('Unknown error initializing Google GenAI Adapter'));
-      }
-    }
-  }, [apiKey, config]);
-
-  return {
-    adapter: adapterConfig,
-    error,
-    isReady: !!adapterConfig && !error
-  };
+export const GeminiAdapter = {
+  generateResponse: async (options: GenerateResponseOptions): Promise<string> => {
+    const { prompt, maxTokens = 1024, temperature = 0.7, model = API_CONFIG.gemini.model } = options;
+    
+    console.log(`Generating response for prompt: ${prompt.substring(0, 50)}...`);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    return "This is a mock response from the Gemini API. In a real implementation, this would contact the Google Generative AI service.";
+  }
 };

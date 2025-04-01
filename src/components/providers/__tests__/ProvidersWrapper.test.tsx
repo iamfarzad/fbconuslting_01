@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ProvidersWrapper from '../ProvidersWrapper';
+import ProvidersWrapper from '@/components/providers/ProvidersWrapper';
 
 describe('ProvidersWrapper', () => {
   test('renders children correctly', () => {

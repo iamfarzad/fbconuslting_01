@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import CountUp from './CountUp';
+import CountUp from '@/components/about/CountUp';
 
 interface SocialProofProps {
   accentColor: string;

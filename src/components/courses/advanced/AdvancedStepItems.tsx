@@ -9,7 +9,7 @@ import {
   AdvancedStep6,
   AdvancedStep7,
   AdvancedStep8
-} from './steps';
+} from '@/components/courses/advanced/steps';
 
 export {
   AdvancedStep1,

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-import ErrorBoundaryWrapper from '../ErrorBoundaryWrapper';
-import { GeminiCopilotProvider } from './GeminiCopilotProvider';
+import ErrorBoundaryWrapper from '@/components/ErrorBoundaryWrapper';
+import { GeminiCopilotProvider } from '@/components/copilot/GeminiCopilotProvider';
 
 interface CopilotContextType {
   enabled: boolean;

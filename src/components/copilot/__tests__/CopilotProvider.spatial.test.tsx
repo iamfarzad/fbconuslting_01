@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { CopilotProvider } from '../CopilotProvider';
+import { CopilotProvider } from '@/components/copilot/CopilotProvider';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 // Mock the hooks

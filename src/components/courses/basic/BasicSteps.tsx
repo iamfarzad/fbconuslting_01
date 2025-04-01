@@ -1,6 +1,6 @@
 
 import React from 'react';
-import BasicStepsWithResources from './BasicStepsWithResources';
+import BasicStepsWithResources from '@/components/courses/basic/BasicStepsWithResources';
 
 const BasicSteps = () => {
   return <BasicStepsWithResources />;

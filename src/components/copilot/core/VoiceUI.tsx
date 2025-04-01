@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { AnimatedBars } from './ui/AnimatedBars';
-import { Button } from './ui/button';
+import { AnimatedBars } from '@/components/copilot/core/ui/AnimatedBars';
+import { Button } from '@/components/copilot/core/ui/button';
 import { Mic, MicOff } from 'lucide-react';
-import { VoicePanel } from './voice/VoicePanel';
+import { VoicePanel } from '@/components/copilot/core/voice/VoicePanel';
 import { useGemini } from '@/components/copilot/providers/GeminiProvider';
 import type { VoiceUIProps } from '@/types/voice';
 import { useToast } from '@/hooks/use-toast';

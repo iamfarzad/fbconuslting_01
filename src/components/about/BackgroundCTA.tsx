@@ -1,14 +1,13 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Calendar, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/services/analyticsService';
 
 const BackgroundCTA = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   const handleConsultation = () => {
     trackEvent({

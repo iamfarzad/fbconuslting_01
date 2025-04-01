@@ -1,11 +1,11 @@
 
 import React from 'react';
-import StepsList from '@/components/StepsList';
+import StepsList from '@/components/courses/StepsList';
 import { 
   BasicStep1, BasicStep2, BasicStep3, BasicStep4,
   BasicStep5, BasicStep6, BasicStep7, BasicStep8, 
   BasicStep9, BasicStep10
-} from './steps';
+} from '@/components/courses/basic/steps';
 
 const BasicStepsList = () => {
   const totalSteps = 10;

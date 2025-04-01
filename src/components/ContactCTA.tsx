@@ -1,15 +1,14 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Calendar, Mail, ArrowRight } from 'lucide-react';
-import AnimatedText from './AnimatedText';
+import AnimatedText from '@/components/AnimatedText';
 import { trackEvent } from '@/services/analyticsService';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 
 const ContactCTA = () => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const { t, language } = useLanguage();
   const isNorwegian = language === 'no';
 

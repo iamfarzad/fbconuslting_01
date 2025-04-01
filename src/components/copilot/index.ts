@@ -1,26 +1,26 @@
 // Core Components
-export { CopilotChat } from './core/CopilotChat';
-export { CopilotConfig } from './core/CopilotConfig';
-export { GeminiChat } from './core/GeminiChat';
+export { CopilotChat } from '@/components/copilot/core/CopilotChat';
+export { CopilotConfig } from '@/components/copilot/core/CopilotConfig';
+export { GeminiChat } from '@/components/copilot/core/GeminiChat';
 
 // Providers - explicit paths to avoid confusion
-export { CopilotProvider } from './providers/CopilotProvider';
-export { GeminiProvider, useGemini } from './providers/GeminiProvider';
-export { GoogleGenAIConfig } from './providers/GoogleGenAIConfig';
+export { CopilotProvider } from '@/components/copilot/providers/CopilotProvider';
+export { GeminiProvider, useGemini } from '@/components/copilot/providers/GeminiProvider';
+export { GoogleGenAIConfig } from '@/components/copilot/providers/GoogleGenAIConfig';
 
 // UI Components
-export { ConnectionStatusIndicator } from './ui/ConnectionStatusIndicator';
-export { DocumentPreview } from './ui/DocumentPreview';
-export { AnimatedBars } from './ui/AnimatedBars';
+export { ConnectionStatusIndicator } from '@/components/copilot/ui/ConnectionStatusIndicator';
+export { DocumentPreview } from '@/components/copilot/ui/DocumentPreview';
+export { AnimatedBars } from '@/components/copilot/ui/AnimatedBars';
 
 // Chat Components
-export { ChatHeader } from './chat/ChatHeader';
-export { ChatMessages } from './chat/ChatMessages';
-export { ChatInputArea } from './chat/ChatInputArea';
-export { ErrorDisplay } from './chat/ErrorDisplay';
+export { ChatHeader } from '@/components/copilot/chat/ChatHeader';
+export { ChatMessages } from '@/components/copilot/chat/ChatMessages';
+export { ChatInputArea } from '@/components/copilot/chat/ChatInputArea';
+export { ErrorDisplay } from '@/components/copilot/chat/ErrorDisplay';
 
 // Common Types
-export type { Message, WebSocketMessage, MessageHandler, VoiceConfig, ChatConfig } from './types';
+export type { Message, WebSocketMessage, MessageHandler, VoiceConfig, ChatConfig } from '@/components/copilot/types';
 
 // API Types
 export type {
@@ -35,7 +35,7 @@ export type {
   FluidComputeConfig,
   APIError,
   HealthCheckResponse
-} from './api/types';
+} from '@/components/copilot/api/types';
 
 // Re-export necessary CopilotKit types and hooks
 export {

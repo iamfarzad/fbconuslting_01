@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CopilotProvider, useCopilot } from '../CopilotProvider';
+import { CopilotProvider, useCopilot } from '@/components/copilot/CopilotProvider';
 
 const TestComponent = () => {
   const { enabled, toggleCopilot } = useCopilot();

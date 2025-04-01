@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { geminiReducer, initialGeminiState } from '../geminiReducer';
-import type { GeminiState, GeminiAction } from '../types';
+import { geminiReducer, initialGeminiState } from '@/components/copilot/geminiReducer';
+import type { GeminiState, GeminiAction } from '@/components/copilot/types';
 
 describe('geminiReducer', () => {
   it('should return the initial state', () => {

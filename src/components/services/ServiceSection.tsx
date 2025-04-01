@@ -1,7 +1,6 @@
-
 import React from 'react';
 import ServiceDetail from '@/components/ServiceDetail';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/services/analyticsService';
 
 interface ServiceSectionProps {
@@ -27,7 +26,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({
   altText,
   callToAction
 }) => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   
   const handleCallToAction = () => {
     // Track the button click event

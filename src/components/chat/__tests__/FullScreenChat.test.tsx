@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import FullScreenChat from '../FullScreenChat';
+import FullScreenChat from '@/components/chat/FullScreenChat';
 import { AIMessage } from '@/services/chat/messageTypes';
 
 const mockMessages: AIMessage[] = [

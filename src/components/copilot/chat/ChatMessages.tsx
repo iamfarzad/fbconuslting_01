@@ -1,94 +1,45 @@
-
 import React from 'react';
-import { AIMessage } from '@/services/chat/messageTypes';
-import { Loader2 } from 'lucide-react';
 
-interface ChatMessagesProps {
-  messages: AIMessage[];
-  isLoading?: boolean;
-  isProviderLoading?: boolean;
-  isListening?: boolean;
-  transcript?: string;
-  error?: string | null;
-  messagesEndRef?: React.RefObject<HTMLDivElement>;
-  isInitialized?: boolean;
+interface Message {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp?: number;
 }
 
-const ChatMessages: React.FC<ChatMessagesProps> = ({
-  messages,
-  isLoading = false,
-  isProviderLoading = false,
-  isListening = false,
-  transcript = '',
-  error = null,
-  messagesEndRef,
-  isInitialized = true
-}) => {
-  // If there are no messages and the provider is still loading, show a loading state
-  if (messages.length === 0 && isProviderLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full p-4">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground mb-4" />
-        <p className="text-sm text-muted-foreground">Initializing AI assistant...</p>
-      </div>
-    );
-  }
+interface ChatMessagesProps {
+  messages: Message[];
+  loading?: boolean;
+}
 
-  // If there are no messages and there's no error, show a welcome message
-  if (messages.length === 0 && !error) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full p-4 text-center">
-        <h3 className="text-lg font-medium mb-2">Welcome to the AI Assistant</h3>
-        <p className="text-sm text-muted-foreground mb-4">
-          How can I help you today?
-        </p>
-      </div>
-    );
-  }
-
+const ChatMessages = ({ messages, loading = false }: ChatMessagesProps) => {
   return (
-    <div className="space-y-4 p-4">
-      {/* Display all messages */}
-      {messages.map((message, index) => (
-        <div
-          key={index}
-          className={`flex ${
-            message.role === 'user' ? 'justify-end' : 'justify-start'
+    <div className="space-y-4 my-4 max-h-80 overflow-y-auto">
+      {messages.map((message) => (
+        <div 
+          key={message.id} 
+          className={`p-3 rounded-lg max-w-[85%] ${
+            message.role === 'user' 
+              ? 'ml-auto bg-blue-100 text-blue-900' 
+              : 'bg-gray-100 text-gray-800'
           }`}
         >
-          <div
-            className={`px-4 py-2 rounded-lg max-w-[80%] ${
-              message.role === 'user'
-                ? 'bg-primary text-primary-foreground'
-                : message.role === 'system'
-                ? 'bg-muted text-muted-foreground'
-                : 'bg-secondary text-secondary-foreground'
-            }`}
-          >
-            {message.content}
-          </div>
+          {message.content}
+          {message.timestamp && (
+            <div className="text-xs text-gray-500 mt-1">
+              {new Date(message.timestamp).toLocaleTimeString()}
+            </div>
+          )}
         </div>
       ))}
 
-      {/* Show loading indicator */}
-      {isLoading && (
-        <div className="flex justify-center py-2">
-          <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+      {loading && (
+        <div className="flex items-center space-x-2 text-gray-500">
+          <div className="w-2 h-2 rounded-full bg-gray-400 animate-pulse"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400 animate-pulse delay-75"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400 animate-pulse delay-150"></div>
         </div>
       )}
-
-      {/* Show listening indicator */}
-      {isListening && (
-        <div className="flex justify-center py-2">
-          <div className="bg-secondary p-3 rounded-lg max-w-[80%]">
-            <p className="text-sm font-medium mb-1">Listening...</p>
-            {transcript && <p className="text-sm italic">{transcript}</p>}
-          </div>
-        </div>
-      )}
-
-      {/* Messages end reference for scrolling */}
-      <div ref={messagesEndRef} />
     </div>
   );
 };

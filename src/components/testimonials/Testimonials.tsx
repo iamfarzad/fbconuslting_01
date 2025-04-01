@@ -5,7 +5,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import AnimatedText from '@/components/AnimatedText';
 import { Testimonial } from '@/types/blog';
-import EnhancedTestimonialCard from './EnhancedTestimonialCard';
+import EnhancedTestimonialCard from '@/components/testimonials/EnhancedTestimonialCard';
 import { MessageSquareQuote } from 'lucide-react';
 
 // Enhanced testimonial data with more details

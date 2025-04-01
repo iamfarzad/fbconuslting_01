@@ -339,4 +339,4 @@ data/literature-data.ts	/data/
 lib/utils.ts	if used
 types/	merge into /types/
 
-
+npx tsc --noEmit

@@ -1,9 +1,9 @@
 
 import React from 'react';
-import { SendMessageButton } from './controls/SendMessageButton';
-import { VoiceButton } from './controls/VoiceButton';
-import { ClearChatButton } from './controls/ClearChatButton';
-import { ImageUploadButton } from './controls/ImageUploadButton';
+import { SendMessageButton } from '@/components/chat/core/controls/SendMessageButton';
+import { VoiceButton } from '@/components/chat/core/controls/VoiceButton';
+import { ClearChatButton } from '@/components/chat/core/controls/ClearChatButton';
+import { ImageUploadButton } from '@/components/chat/core/controls/ImageUploadButton';
 import { useRef } from 'react';
 
 interface InputControlsProps {

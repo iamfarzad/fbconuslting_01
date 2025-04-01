@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Check } from 'lucide-react';
-import AnimatedText from '../AnimatedText';
+import AnimatedText from '@/components/AnimatedText';
 
 interface BenefitsListProps {
   benefits: string[];

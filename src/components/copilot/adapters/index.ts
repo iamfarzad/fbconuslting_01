@@ -1,2 +1,2 @@
 // Export all adapters
-export * from './GoogleGenAIAdapter';
+export * from '@/components/copilot/adapters/GoogleGenAIAdapter';
