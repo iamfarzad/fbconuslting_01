@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -84,8 +86,8 @@ const ServiceDetails = () => {
       service_name: serviceTitle,
       cta_text: ctaText
     });
-    
-    router.push('/contact');
+
+    navigate.push('/contact');
   };
 
   return (

@@ -16,7 +16,7 @@ interface TestimonialProps {
   className?: string;
 }
 
-export function EnhancedTestimonialCard({ content, author, className }: TestimonialProps) {
+export default function EnhancedTestimonialCard({ content, author, className }: TestimonialProps) {
   return (
     <Card className={cn("relative overflow-hidden p-6", className)}>
       <div className="relative z-20 space-y-4">

@@ -9,7 +9,7 @@ interface SEOProps {
   ogType?: "website" | "article";
 }
 
-export const SEO: React.FC<SEOProps> = ({
+const SEO: React.FC<SEOProps> = ({
   title,
   description = "AI consulting, education, and digital solutions for businesses.",
   canonicalUrl,
@@ -43,3 +43,5 @@ export const SEO: React.FC<SEOProps> = ({
     </Head>
   );
 };
+
+export default SEO;
