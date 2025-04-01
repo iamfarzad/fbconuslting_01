@@ -9,7 +9,8 @@ export function useContextTracking(
   setCurrentPage: (page: string) => void,
   setSpatialContext: (context: SpatialContext | ((prev: SpatialContext | null) => SpatialContext)) => void
 ) {
-  const location = useLocation();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const lastUpdateRef = useRef<number>(0);
   const initializedRef = useRef<boolean>(false);
   const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -102,7 +103,7 @@ export function useContextTracking(
   
   // Initialize spatial context on route change - always run this effect
   useEffect(() => {
-    const currentPath = location.pathname;
+    const currentPath = pathname;
     const pageName = currentPath === '/' ? 'home' : currentPath.substring(1);
     
     // Update current page
@@ -119,7 +120,7 @@ export function useContextTracking(
       });
       initializedRef.current = true;
     }
-  }, [location.pathname, setCurrentPage, setSpatialContext]);
+  }, [pathname, setCurrentPage, setSpatialContext]);
   
   // Update spatial context on scroll - with debouncing
   useEffect(() => {

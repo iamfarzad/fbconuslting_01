@@ -1,144 +1,157 @@
-
 import React, { useState } from 'react';
-import { Calendar as CalendarComponent } from '@/components/ui/calendar';
+import { Calendar } from '@/components/ui/calendar';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { addDays, format, startOfDay } from 'date-fns';
+// We'll handle the date-fns import differently
 import { trackEvent } from '@/services/analyticsService';
 import { CalendarDays, Clock, Check } from 'lucide-react';
 
-// Dummy time slots
-const TIME_SLOTS = [
-  '9:00 AM', '10:00 AM', '11:00 AM', 
-  '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'
-];
+// Define simple date utility functions to replace date-fns
+const formatDate = (date: Date): string => {
+  return date.toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+};
+
+const addDays = (date: Date, days: number): Date => {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+};
+
+const startOfDay = (date: Date): Date => {
+  const result = new Date(date);
+  result.setHours(0, 0, 0, 0);
+  return result;
+};
 
 interface BookingCalendarProps {
-  onBookingSelected?: (date: Date | undefined, time: string | null) => void;
+  onBookingConfirmed: (date: Date, time: string) => void;
 }
 
-const BookingCalendar = ({ onBookingSelected }: BookingCalendarProps) => {
-  const [date, setDate] = useState<Date | undefined>(undefined);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+const BookingCalendar: React.FC<BookingCalendarProps> = ({ onBookingConfirmed }) => {
   const { toast } = useToast();
-
-  // Calculate available dates (next 30 days)
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [selectedTime, setSelectedTime] = useState<string | undefined>(undefined);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const today = startOfDay(new Date());
-  const thirtyDaysFromNow = addDays(today, 30);
-
-  const handleBooking = () => {
-    if (!date || !selectedTime) {
+  const oneMonthFromNow = addDays(today, 30);
+  
+  const availableTimes = [
+    "09:00 AM", "10:00 AM", "11:00 AM", 
+    "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"
+  ];
+  
+  const handleSelectDate = (date: Date | undefined) => {
+    setSelectedDate(date);
+    setSelectedTime(undefined); // Reset time when date changes
+  };
+  
+  const handleSelectTime = (time: string) => {
+    setSelectedTime(time);
+  };
+  
+  const handleConfirmBooking = () => {
+    if (!selectedDate || !selectedTime) {
       toast({
-        variant: "destructive",
-        title: "Missing information",
-        description: "Please select both a date and time.",
+        title: "Booking Error",
+        description: "Please select both a date and time for your consultation.",
+        variant: "destructive"
       });
       return;
     }
-
-    if (onBookingSelected) {
-      // If using the confirmation step, pass data to parent
-      onBookingSelected(date, selectedTime);
-    } else {
-      // Legacy direct booking flow (for backward compatibility)
-      // This would normally send to the Calendly API
+    
+    setIsSubmitting(true);
+    
+    // Track the booking event
+    trackEvent({
+      action: 'book',
+      category: 'consultation',
+      label: 'calendar_booking',
+      date: selectedDate.toISOString().split('T')[0],
+      time: selectedTime
+    });
+    
+    // Simulate API call to book appointment
+    setTimeout(() => {
       toast({
-        title: "Consultation booked!",
-        description: `Your consultation is scheduled for ${format(date, 'MMMM d, yyyy')} at ${selectedTime}.`,
+        title: "Booking Confirmed!",
+        description: `Your consultation is scheduled for ${formatDate(selectedDate)} at ${selectedTime}`,
+        variant: "default"
       });
       
-      // Track the lead generation event for consultation booking
-      trackEvent({
-        action: 'generate_lead',
-        category: 'conversion',
-        label: 'consultation_booking',
-        value: 10, // Higher value assigned to consultation bookings
-        lead_type: 'consultation',
-        lead_source: window.location.pathname,
-        booking_date: format(date, 'yyyy-MM-dd'),
-        booking_time: selectedTime,
-      });
-      
-      console.log('Lead generated: Consultation booking', {
-        date: format(date, 'yyyy-MM-dd'),
-        time: selectedTime
-      });
-      
-      // Reset form
-      setDate(undefined);
-      setSelectedTime(null);
-    }
+      onBookingConfirmed(selectedDate, selectedTime);
+      setIsSubmitting(false);
+    }, 1500);
   };
-
+  
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 text-teal-600 mb-4">
-          <CalendarDays size={20} />
-          <h3 className="font-medium">Select Date</h3>
-        </div>
-        
-        <div className="bg-white rounded-lg p-4 shadow-sm">
-          <CalendarComponent
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            disabled={(date) => {
-              // Disable dates in the past and more than 30 days in the future
-              return date < today || date > thirtyDaysFromNow;
-            }}
-            className="rounded-md"
-          />
-        </div>
-      </div>
-      
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 text-teal-600 mb-4">
-          <Clock size={20} />
-          <h3 className="font-medium">Select Time</h3>
-        </div>
-        
-        {date ? (
-          <div className="bg-white rounded-lg p-6 shadow-sm h-full">
-            <h4 className="font-medium mb-4">
-              Available on {format(date, 'MMMM d, yyyy')}:
-            </h4>
-            <div className="grid grid-cols-2 gap-3">
-              {TIME_SLOTS.map((time) => (
-                <Button
-                  key={time}
-                  variant="outline"
-                  className={`justify-start px-4 py-6 text-base font-normal ${
-                    selectedTime === time 
-                      ? 'bg-teal-50 text-teal-700 border-teal-300 hover:bg-teal-100' 
-                      : 'border-gray-200'
-                  }`}
-                  onClick={() => setSelectedTime(time)}
-                >
-                  {selectedTime === time && (
-                    <Check size={16} className="mr-2 text-teal-600" />
-                  )}
-                  {time}
-                </Button>
-              ))}
+    <Card className="w-full max-w-md mx-auto">
+      <CardContent className="p-6">
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-medium mb-2 flex items-center">
+              <CalendarDays className="mr-2 h-5 w-5 text-primary" />
+              Select a Date
+            </h3>
+            <Calendar
+              mode="single"
+              selected={selectedDate}
+              onSelect={handleSelectDate}
+              disabled={(date) => date < today || date > oneMonthFromNow}
+              className="rounded-md border"
+            />
+          </div>
+          
+          {selectedDate && (
+            <div>
+              <h3 className="text-lg font-medium mb-2 flex items-center">
+                <Clock className="mr-2 h-5 w-5 text-primary" />
+                Select a Time
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
+                {availableTimes.map((time) => (
+                  <Button
+                    key={time}
+                    variant={selectedTime === time ? "default" : "outline"}
+                    className={selectedTime === time ? "border-primary" : ""}
+                    onClick={() => handleSelectTime(time)}
+                  >
+                    {time}
+                  </Button>
+                ))}
+              </div>
             </div>
-            
-            <Button 
-              onClick={handleBooking}
-              className="w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white"
-              disabled={!date || !selectedTime}
-            >
-              {onBookingSelected ? "Continue to Confirm" : "Confirm Booking"}
-            </Button>
-          </div>
-        ) : (
-          <div className="bg-white rounded-lg p-6 shadow-sm h-full flex flex-col items-center justify-center text-center text-muted-foreground">
-            <Clock size={36} className="mb-3 opacity-40" />
-            <p>Please select a date first to see available time slots</p>
-          </div>
-        )}
-      </div>
-    </div>
+          )}
+          
+          {selectedDate && selectedTime && (
+            <div className="pt-4">
+              <Button 
+                className="w-full"
+                disabled={isSubmitting}
+                onClick={handleConfirmBooking}
+              >
+                {isSubmitting ? (
+                  <>Processing...</>
+                ) : (
+                  <>
+                    <Check className="mr-2 h-4 w-4" />
+                    Confirm Booking
+                  </>
+                )}
+              </Button>
+              <p className="text-sm text-muted-foreground mt-2 text-center">
+                You'll receive a confirmation email with meeting details
+              </p>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

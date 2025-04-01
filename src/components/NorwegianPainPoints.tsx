@@ -12,7 +12,7 @@ interface NorwegianPainPointsProps {
 }
 
 const NorwegianPainPoints: React.FC<NorwegianPainPointsProps> = ({ isVisible }) => {
-  const navigate = useRouter();
+  const router = useRouter();
   const { t, language } = useLanguage();
   
   // Only show for Norwegian language

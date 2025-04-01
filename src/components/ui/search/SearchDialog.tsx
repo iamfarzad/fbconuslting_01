@@ -22,7 +22,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
   const [searchResults, setSearchResults] = useState<SearchResultItem[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useRouter();
+  const router = useRouter();
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);

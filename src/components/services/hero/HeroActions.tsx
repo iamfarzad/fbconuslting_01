@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 const HeroActions = () => {
-  const navigate = useRouter();
+  const router = useRouter();
   
   const handleExploreServices = () => {
     trackEvent({
