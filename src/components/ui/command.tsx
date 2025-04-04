@@ -1,16 +1,18 @@
 import * as React from "react"
 import { type DialogProps } from "@radix-ui/react-dialog"
-import { Command as CommandPrimitive } from "cmdk"
+// Import sub-components directly from cmdk
+import { Command as CommandPrimitive, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandSeparator, CommandItem } from "cmdk"
 import { Search } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 
+// Keep Command aliased as CommandPrimitive for the main wrapper if desired, or rename
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive>
 >(({ className, ...props }, ref) => (
-  <CommandPrimitive
+  <CommandPrimitive // Use the alias here for the main component
     ref={ref}
     className={cn(
       "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
@@ -35,13 +37,14 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
   )
 }
 
-const CommandInput = React.forwardRef<
-  React.ElementRef<typeof CommandPrimitive.Input>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
+// Use the directly imported CommandInput
+const CommandInputComponent = React.forwardRef<
+  React.ElementRef<typeof CommandInput>,
+  React.ComponentPropsWithoutRef<typeof CommandInput>
 >(({ className, ...props }, ref) => (
   <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
     <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-    <CommandPrimitive.Input
+    <CommandInput // Use direct import
       ref={ref}
       className={cn(
         "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
@@ -52,39 +55,45 @@ const CommandInput = React.forwardRef<
   </div>
 ))
 
-CommandInput.displayName = CommandPrimitive.Input.displayName
+// Assign displayName to the new component name
+CommandInputComponent.displayName = CommandInput.displayName
 
-const CommandList = React.forwardRef<
-  React.ElementRef<typeof CommandPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>
+// Use the directly imported CommandList
+const CommandListComponent = React.forwardRef<
+  React.ElementRef<typeof CommandList>,
+  React.ComponentPropsWithoutRef<typeof CommandList>
 >(({ className, ...props }, ref) => (
-  <CommandPrimitive.List
+  <CommandList // Use direct import
     ref={ref}
     className={cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className)}
     {...props}
   />
 ))
 
-CommandList.displayName = CommandPrimitive.List.displayName
+// Assign displayName to the new component name
+CommandListComponent.displayName = CommandList.displayName
 
-const CommandEmpty = React.forwardRef<
-  React.ElementRef<typeof CommandPrimitive.Empty>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
+// Use the directly imported CommandEmpty
+const CommandEmptyComponent = React.forwardRef<
+  React.ElementRef<typeof CommandEmpty>,
+  React.ComponentPropsWithoutRef<typeof CommandEmpty>
 >((props, ref) => (
-  <CommandPrimitive.Empty
+  <CommandEmpty // Use direct import
     ref={ref}
     className="py-6 text-center text-sm"
     {...props}
   />
 ))
 
-CommandEmpty.displayName = CommandPrimitive.Empty.displayName
+// Assign displayName to the new component name
+CommandEmptyComponent.displayName = CommandEmpty.displayName
 
-const CommandGroup = React.forwardRef<
-  React.ElementRef<typeof CommandPrimitive.Group>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>
+// Use the directly imported CommandGroup
+const CommandGroupComponent = React.forwardRef<
+  React.ElementRef<typeof CommandGroup>,
+  React.ComponentPropsWithoutRef<typeof CommandGroup>
 >(({ className, ...props }, ref) => (
-  <CommandPrimitive.Group
+  <CommandGroup // Use direct import
     ref={ref}
     className={cn(
       "overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground",
@@ -94,25 +103,29 @@ const CommandGroup = React.forwardRef<
   />
 ))
 
-CommandGroup.displayName = CommandPrimitive.Group.displayName
+// Assign displayName to the new component name
+CommandGroupComponent.displayName = CommandGroup.displayName
 
-const CommandSeparator = React.forwardRef<
-  React.ElementRef<typeof CommandPrimitive.Separator>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
+// Use the directly imported CommandSeparator
+const CommandSeparatorComponent = React.forwardRef<
+  React.ElementRef<typeof CommandSeparator>,
+  React.ComponentPropsWithoutRef<typeof CommandSeparator>
 >(({ className, ...props }, ref) => (
-  <CommandPrimitive.Separator
+  <CommandSeparator // Use direct import
     ref={ref}
     className={cn("-mx-1 h-px bg-border", className)}
     {...props}
   />
 ))
-CommandSeparator.displayName = CommandPrimitive.Separator.displayName
+// Assign displayName to the new component name
+CommandSeparatorComponent.displayName = CommandSeparator.displayName
 
-const CommandItem = React.forwardRef<
-  React.ElementRef<typeof CommandPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
+// Use the directly imported CommandItem
+const CommandItemComponent = React.forwardRef<
+  React.ElementRef<typeof CommandItem>,
+  React.ComponentPropsWithoutRef<typeof CommandItem>
 >(({ className, ...props }, ref) => (
-  <CommandPrimitive.Item
+  <CommandItem // Use direct import
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50",
@@ -122,8 +135,10 @@ const CommandItem = React.forwardRef<
   />
 ))
 
-CommandItem.displayName = CommandPrimitive.Item.displayName
+// Assign displayName to the new component name
+CommandItemComponent.displayName = CommandItem.displayName
 
+// CommandShortcut remains the same as it doesn't use CommandPrimitive
 const CommandShortcut = ({
   className,
   ...props
@@ -140,14 +155,15 @@ const CommandShortcut = ({
 }
 CommandShortcut.displayName = "CommandShortcut"
 
+// Export the renamed components
 export {
   Command,
   CommandDialog,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
+  CommandInputComponent as CommandInput, // Export with original name
+  CommandListComponent as CommandList, // Export with original name
+  CommandEmptyComponent as CommandEmpty, // Export with original name
+  CommandGroupComponent as CommandGroup, // Export with original name
+  CommandItemComponent as CommandItem, // Export with original name
   CommandShortcut,
-  CommandSeparator,
+  CommandSeparatorComponent as CommandSeparator, // Export with original name
 }

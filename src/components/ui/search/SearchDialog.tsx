@@ -1,13 +1,15 @@
+"use client"; // Add "use client" directive
+
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Import useRouter
 import { 
   Dialog, 
   DialogContent,
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog';
-import { SearchBar } from '@/components/ui/search/SearchBar';
-import { SearchResults, SearchResultItem } from '@/components/ui/search/SearchResults';
+import { SearchBar } from './SearchBar';
+import { SearchResults, SearchResultItem } from './SearchResults';
 import { searchContent, trackSearch } from '@/services/searchService';
 
 interface SearchDialogProps {
@@ -22,7 +24,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
   const [searchResults, setSearchResults] = useState<SearchResultItem[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const router = useRouter();
+  const router = useRouter(); // Use useRouter hook
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
@@ -31,7 +33,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
     try {
       const results = await searchContent(query);
       setSearchResults(results);
-      trackSearch(query, results.length);
+      trackSearch(query); // Pass only the query argument
     } catch (error) {
       console.error('Search error:', error);
       setSearchResults([]);
@@ -42,7 +44,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
 
   const handleResultClick = (result: SearchResultItem) => {
     onOpenChange(false);
-    router.push(result.url);
+    router.push(result.url); // Use router.push
   };
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from 'next/link'; // Import Link from next/link
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -65,7 +65,7 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
               transition={{ duration: 0.3, delay: i * 0.05 }}
             >
               <Link 
-                href={result.url}
+                href={result.url} // Change 'to' prop to 'href'
                 className="block p-3 rounded-md hover:bg-muted transition-colors"
                 onClick={() => onResultClick?.(result)}
               >

@@ -1,6 +1,7 @@
+"use client"; // Add this directive
 
 import { Book, Sunset, Trees, Zap } from "lucide-react";
-import { Navbar1 } from '@/components/ui/navbar';
+import { Navbar1 } from "./navbar";
 
 // Define the dark mode toggle props
 interface DarkModeToggle {
@@ -80,10 +81,22 @@ const demoData = {
       url: "/resources",
       items: [
         {
+          title: "Workshop",
+          description: "Learn AI implementation step by step",
+          icon: <Book className="size-5 shrink-0" />,
+          url: "/workshop",
+        },
+        {
           title: "Blog",
           description: "Expert insights and case studies",
           icon: <Book className="size-5 shrink-0" />,
           url: "/blog",
+        },
+        {
+          title: "Literature",
+          description: "Research and best practices",
+          icon: <Trees className="size-5 shrink-0" />,
+          url: "/resources/literature",
         },
         {
           title: "Pricing",

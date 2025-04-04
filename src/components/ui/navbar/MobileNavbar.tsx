@@ -1,3 +1,5 @@
+"use client"; // Add this directive
+
 import React from "react";
 import { Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,12 +11,19 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Accordion } from "@/components/ui/accordion";
-import { MenuItem } from '@/components/ui/navbar/MenuItem';
-import { renderMobileMenuItem } from '@/components/ui/navbar/MobileMenuItem';
-import { MobileDarkModeToggle, DarkModeToggleProps } from '@/components/ui/navbar/DarkModeToggle';
+import { MenuItem } from "./MenuItem";
+import { renderMobileMenuItem } from "./MobileMenuItem";
+import { MobileDarkModeToggle, DarkModeToggleProps } from "./DarkModeToggle";
 import { SearchButton } from "@/components/ui/search/SearchButton";
 import { SearchBar } from "@/components/ui/search/SearchBar";
-import { Logo3D } from "@/components/3d/Logo3D";
+// import { Logo3D } from "@/components/3d/Logo3D"; // Import dynamically
+import dynamic from 'next/dynamic';
+
+const Logo3D = dynamic(() => import('@/components/3d/Logo3D').then(mod => mod.Logo3D), { 
+  ssr: false,
+  // Optional: Add a loading component if needed
+  // loading: () => <p>Loading Logo...</p> 
+});
 
 interface NavbarLogoProps {
   url: string;
@@ -48,7 +57,10 @@ export const MobileNavbar: React.FC<MobileNavbarProps> = ({
     <div className="block lg:hidden">
       <div className="flex items-center justify-between">
         <a href={logo.url} className="flex items-center gap-2">
-          <Logo3D size="w-10 h-10" />
+          {/* <Logo3D size="w-10 h-10" /> Temporarily removed due to runtime errors */}
+           <div className="w-10 h-10 flex items-center justify-center bg-muted rounded-md">
+             <span className="text-xs font-semibold text-muted-foreground">FB</span>
+          </div>
           <span className="text-lg font-semibold">{logo.title}</span>
         </a>
         <div className="flex items-center gap-2">
@@ -69,7 +81,10 @@ export const MobileNavbar: React.FC<MobileNavbarProps> = ({
               <SheetHeader>
                 <SheetTitle>
                   <a href={logo.url} className="flex items-center gap-2">
-                    <Logo3D size="w-10 h-10" />
+                    {/* <Logo3D size="w-10 h-10" /> Temporarily removed due to runtime errors */}
+                    <div className="w-10 h-10 flex items-center justify-center bg-muted rounded-md">
+                       <span className="text-xs font-semibold text-muted-foreground">FB</span>
+                    </div>
                     <span className="text-lg font-semibold">
                       {logo.title}
                     </span>

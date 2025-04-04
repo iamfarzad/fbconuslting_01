@@ -1,3 +1,3 @@
 
 // Re-export components from parent file
-export { ChatBubble, ChatBubbleProps } from '@/components/ui/chat-bubble';
+export { ChatBubble } from '../chat-bubble'; // Removed ChatBubbleProps as it's not exported
