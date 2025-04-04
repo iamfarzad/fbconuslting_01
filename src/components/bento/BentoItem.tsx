@@ -1,3 +1,4 @@
+"use client"; // Added "use client" directive
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';

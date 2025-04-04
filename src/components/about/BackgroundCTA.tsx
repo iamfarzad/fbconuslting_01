@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
@@ -7,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { trackEvent } from '@/services/analyticsService';
 
 const BackgroundCTA = () => {
-  const navigate = useRouter();
+  const router = useRouter(); // Use 'router' consistently
   
   const handleConsultation = () => {
     trackEvent({

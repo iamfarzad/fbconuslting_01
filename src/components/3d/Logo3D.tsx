@@ -1,3 +1,5 @@
+"use client"; // Add this directive
+
 import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, OrbitControls } from '@react-three/drei'

@@ -7,10 +7,10 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 const AboutHero = () => {
-  const navigate = useRouter();
+  const router = useRouter(); // Use 'router' consistently
   
   const handleBookConsultation = () => {
-    router.push('/contact');
+    router.push('/contact'); // Use 'router' here as well
   };
   
   return (
@@ -27,7 +27,7 @@ const AboutHero = () => {
             <AnimatedText 
               text="Helping Businesses Cut Costs, Automate Workflows & Scale with AI" 
               tag="h2" 
-              delay={200} 
+               
               className="text-xl text-primary mb-8" 
             />
             <motion.div 

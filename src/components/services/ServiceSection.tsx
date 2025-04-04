@@ -1,7 +1,10 @@
+
+"use client"; // Add use client directive
+
 import React from 'react';
-import ServiceDetail from '@/components/ServiceDetail';
-import { useRouter } from 'next/navigation';
-import { trackEvent } from '@/services/analyticsService';
+import ServiceDetail from '@/components/ServiceDetail'; // Assuming this path is correct
+import { useRouter } from 'next/navigation'; // Import useRouter
+import { trackEvent } from '@/services/analyticsService'; // Assuming this path is correct
 
 interface ServiceSectionProps {
   id: string;
@@ -26,7 +29,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({
   altText,
   callToAction
 }) => {
-  const navigate = useRouter();
+  const router = useRouter(); // Use useRouter hook
   
   const handleCallToAction = () => {
     // Track the button click event
@@ -40,7 +43,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({
     });
     
     // Navigate to the contact page
-    router.push('/contact');
+    router.push('/contact'); // Use router.push for navigation
   };
   
   return (

@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link'; // Import Next.js Link
 import { Workflow, ArrowRight, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/services/analyticsService';
@@ -7,7 +8,7 @@ import { motion } from 'framer-motion';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 const HeroActions = () => {
-  const router = useRouter();
+  // Removed useNavigate hook
   
   const handleExploreServices = () => {
     trackEvent({
@@ -32,8 +33,7 @@ const HeroActions = () => {
       cta_location: 'services_hero',
       cta_text: 'Schedule Consultation'
     });
-    
-    router.push('/contact');
+    // Navigation handled by Link component below
   };
 
   return (
@@ -55,18 +55,22 @@ const HeroActions = () => {
         </div>
       </ShimmerButton>
       
-      <ShimmerButton 
-        onClick={handleScheduleConsultation}
-        className="rounded-full py-3 px-8 text-lg border border-white/40"
-        background="transparent"
-        shimmerColor="rgba(255, 255, 255, 0.2)"
-      >
-        <div className="flex items-center text-white dark:text-white">
-          <Calendar className="mr-2 h-5 w-5 text-[#fe5a1d] group-hover:scale-110 transition-all duration-300" />
-          <span>Schedule Consultation</span>
-          <ArrowRight className="ml-2 h-4 w-4 text-[#fe5a1d] group-hover:translate-x-1 transition-transform duration-300" />
-        </div>
-      </ShimmerButton>
+      {/* Wrap the second ShimmerButton with Link */}
+      <Link href="/contact" passHref legacyBehavior>
+        <ShimmerButton 
+          onClick={handleScheduleConsultation} // Keep for analytics
+          className="rounded-full py-3 px-8 text-lg border border-white/40"
+          background="transparent"
+          shimmerColor="rgba(255, 255, 255, 0.2)"
+          // Add 'as="a"' if needed, depending on ShimmerButton implementation
+        > 
+          <div className="flex items-center text-white dark:text-white">
+            <Calendar className="mr-2 h-5 w-5 text-[#fe5a1d] group-hover:scale-110 transition-all duration-300" />
+            <span>Schedule Consultation</span>
+            <ArrowRight className="ml-2 h-4 w-4 text-[#fe5a1d] group-hover:translate-x-1 transition-transform duration-300" />
+          </div>
+        </ShimmerButton>
+      </Link>
     </motion.div>
   );
 };

@@ -1,3 +1,4 @@
+"use client"; // Added "use client" directive
 
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -8,7 +9,7 @@ const DataInsightsAnimation: React.FC = () => {
       {[40, 80, 50, 70, 90, 60].map((height, i) => (
         <motion.div
           key={i}
-          className="w-3 bg-gradient-to-t from-teal to-retro-pink rounded-t"
+          className="w-3 bg-gradient-to-t from-teal to-retro-pink rounded-t" // Note: Ensure colors are defined
           initial={{ height: 0 }}
           animate={{ height: `${height}%` }}
           transition={{ 

@@ -1,0 +1,9 @@
+{
+  "config": {
+    "default": true,
+    "no-inline-html": false,
+    "line-length": false,
+    "first-line-h1": false
+  },
+  "ignores": ["**/package.json", "**/node_modules/**", "**/README.md"]
+}

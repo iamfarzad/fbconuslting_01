@@ -32,13 +32,13 @@ const BentoGrid: React.FC = () => {
           viewport={{ once: true }}
         >
           {services.map((service, index) => (
-            <BentoItem 
+            <BentoItem
               key={index}
               title={service.title}
               description={service.description}
               icon={service.icon}
-              className={service.className}
-              hoverAnimation={service.hoverAnimation}
+              // Removed className={service.className}
+              // Removed hoverAnimation={service.hoverAnimation}
             />
           ))}
         </motion.div>

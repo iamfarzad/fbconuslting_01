@@ -1,11 +1,13 @@
 import { Metadata } from "next";
-import { ServiceDetails } from "@/components/services/ServiceDetails";
+// Import the new page component (will be created next)
+import ServicesPageContainer from "@/components/services/ServicesPageContainer"; 
 
 export const metadata: Metadata = {
-  title: "Services | FB Consulting",
-  description: "Explore our range of consulting services",
+  title: "AI Services | FB Consulting", // Updated title
+  description: "Explore our AI Strategy, Chatbot, Workflow Automation, Data Insight, and Custom Development services.", // Updated description
 };
 
 export default function ServicesPage() {
-  return <ServiceDetails />;
+  // Render the new container component
+  return <ServicesPageContainer />;
 }

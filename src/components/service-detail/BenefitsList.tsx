@@ -13,7 +13,7 @@ const BenefitsList: React.FC<BenefitsListProps> = ({ benefits }) => {
       <AnimatedText
         text="Key Benefits"
         tag="h3"
-        delay={300}
+        
         className="text-xl font-semibold text-teal"
       />
       <ul className="space-y-2">

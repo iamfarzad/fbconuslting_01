@@ -11,8 +11,8 @@ import {
   SortDesc
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { BlogFilters as BlogFiltersType, BlogSortOptions } from '@/services/blog/types';
-import { getBlogCategories } from '@/services/blog';
+import { BlogFilters as BlogFiltersType, BlogSortOptions } from '@/types/blog'; // Corrected types path
+import { getBlogCategories } from '@/lib/blog'; // Corrected service path
 
 interface BlogFiltersProps {
   filters: BlogFiltersType;

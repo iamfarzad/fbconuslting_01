@@ -1,4 +1,6 @@
 
+"use client"; // Add this directive
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import AnimatedText from '@/components/AnimatedText';

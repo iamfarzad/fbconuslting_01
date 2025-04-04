@@ -1,41 +1,36 @@
-// Core Components
-export { CopilotChat } from '@/components/copilot/core/CopilotChat';
-export { CopilotConfig } from '@/components/copilot/core/CopilotConfig';
-export { GeminiChat } from '@/components/copilot/core/GeminiChat';
+// Core Components - REMOVED Legacy/Non-existent paths
+// export { CopilotChat } from '@/components/copilot/core/CopilotChat';
+// export { VoiceUI } from '@/components/copilot/core/VoiceUI';
+// export { useCopilot } from '@/components/copilot/hooks/useCopilot';
+// export { useCopilotAction } from '@/components/copilot/hooks/useCopilotAction'; // Causes duplicate identifier error
+// export { useCopilotReadable } from '@/components/copilot/hooks/useCopilotReadable';
+// export { GeminiCopilotProvider, useGeminiCopilot } from '@/components/copilot/GeminiCopilotProvider'; // Likely deprecated
 
-// Providers - explicit paths to avoid confusion
-export { CopilotProvider } from '@/components/copilot/providers/CopilotProvider';
-export { GeminiProvider, useGemini } from '@/components/copilot/providers/GeminiProvider';
-export { GoogleGenAIConfig } from '@/components/copilot/providers/GoogleGenAIConfig';
+// Core UI Components - REMOVED Duplicates/Non-existent paths
+// export { Button } from '@/components/copilot/core/ui/button';
+// export { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/copilot/core/ui/dialog';
+// export { Textarea } from '@/components/copilot/core/ui/textarea';
 
-// UI Components
-export { ConnectionStatusIndicator } from '@/components/copilot/ui/ConnectionStatusIndicator';
-export { DocumentPreview } from '@/components/copilot/ui/DocumentPreview';
-export { AnimatedBars } from '@/components/copilot/ui/AnimatedBars';
+// Chat specific UI - REMOVED Legacy/Non-existent paths
+// export { ChatInput } from '@/components/copilot/chat/ChatInputArea';
 
-// Chat Components
-export { ChatHeader } from '@/components/copilot/chat/ChatHeader';
-export { ChatMessages } from '@/components/copilot/chat/ChatMessages';
-export { ChatInputArea } from '@/components/copilot/chat/ChatInputArea';
-export { ErrorDisplay } from '@/components/copilot/chat/ErrorDisplay';
+// Types - REMOVED as paths/exports are incorrect or types are unused here
+// export type { Message, WebSocketMessage, MessageHandler, VoiceConfig, ChatConfig } from '@/types/chat';
 
-// Common Types
-export type { Message, WebSocketMessage, MessageHandler, VoiceConfig, ChatConfig } from '@/components/copilot/types';
-
-// API Types
-export type {
-  StreamResponse,
-  AudioResponse,
-  VisionResponse,
-  ChatRequest,
-  AudioRequest,
-  VisionRequest,
-  WebSocketRequest,
-  WebSocketResponse,
-  FluidComputeConfig,
-  APIError,
-  HealthCheckResponse
-} from '@/components/copilot/api/types';
+// API Types - REMOVED as paths/exports are incorrect or types are unused here
+// export type {
+//   StreamResponse,
+//   AudioResponse,
+//   VisionResponse,
+//   ChatRequest,
+//   AudioRequest,
+//   VisionRequest,
+//   WebSocketRequest,
+//   WebSocketResponse,
+//   FluidComputeConfig,
+//   APIError,
+//   HealthCheckResponse
+// } from '@/types/gemini';
 
 // Re-export necessary CopilotKit types and hooks
 export {

@@ -1,11 +1,13 @@
 
+"use client"; // Add use client directive
+
 import React from 'react';
 import { cn } from '@/lib/utils';
-import HeroBackground from '@/components/services/hero/HeroBackground';
-import HeroContent from '@/components/services/hero/HeroContent';
-import HeroAnimation from '@/components/services/hero/HeroAnimation';
-import ScrollIndicator from '@/components/services/hero/ScrollIndicator';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { HeroBackground } from '@/components/hero/HeroBackground'; // Use named import
+import { HeroContent } from '@/components/hero/HeroContent'; // Use named import
+// import HeroAnimation from './hero/HeroAnimation'; // Removed for now
+// import ScrollIndicator from './hero/ScrollIndicator'; // Removed for now
+import LanguageSwitcher from '@/components/LanguageSwitcher'; // Update import path
 
 interface ServicesHeroProps {
   className?: string;
@@ -18,15 +20,15 @@ const ServicesHero: React.FC<ServicesHeroProps> = ({ className }) => {
       
       <div className="container relative z-10 mx-auto max-w-6xl px-4">
         <div className="absolute top-0 right-4 z-20">
-          <LanguageSwitcher variant="dropdown" />
+          <LanguageSwitcher /> 
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <HeroContent />
-          <HeroAnimation />
+          {/* <HeroAnimation /> */} {/* Removed for now */}
         </div>
         
-        <ScrollIndicator />
+        {/* <ScrollIndicator /> */} {/* Removed for now */}
       </div>
     </section>
   );

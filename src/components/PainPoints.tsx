@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import AnimatedText from '@/components/AnimatedText';
@@ -8,8 +10,8 @@ import { trackEvent } from '@/services/analyticsService';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const PainPoints = () => {
-  const navigate = useRouter();
-  const { t, language } = useLanguage();
+  const router = useRouter(); // Use 'router' consistently
+  const { language } = useLanguage(); // Remove 't'
   
   // Combined pain points and solutions for more concise presentation
   const businessChallenges: TiltedScrollItem[] = [
@@ -50,14 +52,14 @@ const PainPoints = () => {
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-12">
           <AnimatedText
-            text={t('challenges_title')}
+            text="Challenges Title Placeholder" // Replace t()
             tag="h2"
             className="text-3xl md:text-4xl font-bold mb-4 text-foreground"
           />
           <AnimatedText
-            text={t('challenges_subtitle')}
+            text="Challenges Subtitle Placeholder" // Replace t()
             tag="p"
-            delay={200}
+            // delay={200} // Remove delay prop
             className="text-lg text-foreground/80 max-w-2xl mx-auto"
           />
         </div>
@@ -77,7 +79,7 @@ const PainPoints = () => {
               className="rounded-full px-8 neo-button group"
               onClick={handleGetAuditClick}
             >
-              {t('get_audit')}
+              Get Audit Placeholder {/* Replace t() */}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>

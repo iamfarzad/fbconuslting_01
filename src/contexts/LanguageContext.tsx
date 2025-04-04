@@ -1,50 +1,61 @@
-import React, { createContext, useContext, useState } from 'react';
+"use client";
 
-type Language = 'en' | 'no';
+import { createContext, useContext, useState, useEffect } from "react";
+
+type Language = "en" | "no";
 
 interface LanguageContextType {
   language: Language;
+  locale: string; // Add locale string (e.g., 'en-US', 'nb-NO')
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
-  availableLanguages: Language[];
 }
 
-const translations = {
-  en: {
-    // Add English translations here
-    'hero.title': 'Welcome to FB Consulting',
-    'hero.subtitle': 'AI Solutions for Business',
-    // Add more translations as needed
-  },
-  no: {
-    // Add Norwegian translations here
-    'hero.title': 'Velkommen til FB Consulting',
-    'hero.subtitle': 'AI-løsninger for bedrifter',
-    // Add more translations as needed
-  },
-};
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const availableLanguages: Language[] = ['en', 'no'];
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const [language, setLanguage] = useState<Language>("en");
 
-const LanguageContext = createContext<LanguageContextType>({
-  language: 'en',
-  setLanguage: () => {},
-  t: (key) => key,
-  availableLanguages
-});
+  useEffect(() => {
+    // Try to get language from localStorage first
+    const savedLanguage = localStorage.getItem("language") as Language;
+    if (savedLanguage && (savedLanguage === "en" || savedLanguage === "no")) {
+      setLanguage(savedLanguage);
+      return;
+    }
 
-export const LanguageProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('en');
+    // Otherwise detect from browser
+    const browserLang = navigator.language.toLowerCase();
+    if (browserLang.startsWith("no")) {
+      setLanguage("no");
+    }
+  }, []);
 
-  const t = (key: string) => {
-    return translations[language][key as keyof typeof translations[typeof language]] || key;
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang);
+    localStorage.setItem("language", lang);
+    document.documentElement.lang = lang;
   };
 
+  // Determine locale string based on language state
+  const locale = language === 'no' ? 'nb-NO' : 'en-US';
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, availableLanguages }}>
+    <LanguageContext.Provider
+      value={{
+        language,
+        locale, // Provide the locale string
+        setLanguage: handleSetLanguage,
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   );
-};
+}
 
-export const useLanguage = () => useContext(LanguageContext);
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return context;
+}

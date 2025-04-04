@@ -39,7 +39,7 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
         action: 'generate_lead',
         category: 'conversion',
         label: 'newsletter_signup',
-        value: 1,
+        value: '1', // Changed number to string to match expected type
         lead_type: 'newsletter',
         lead_source: window.location.pathname,
         lead_email: email.split('@')[1], // Only tracking domain for privacy

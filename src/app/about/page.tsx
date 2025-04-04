@@ -1,39 +1,36 @@
-"use client";
+"use client"; // Keep this if components below need client-side features
 
-
-import React, { useEffect } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import React from 'react';
+// import Navbar from '@/components/Navbar'; // Should be handled by root layout
+// import Footer from '@/components/Footer'; // Should be handled by root layout
 import SEO from '@/components/SEO';
-import { useRouter } from 'next/navigation';
+// Removed useRouter and useEffect as redirect is no longer needed
+import AboutHero from '@/components/about/AboutHero'; // Assuming this exists
+import SkillsTechnologies from '@/components/about/SkillsTechnologies'; // Assuming this exists
+import BackgroundCTA from '@/components/about/BackgroundCTA'; // Assuming this exists
 
 const About = () => {
-  const navigate = useRouter();
-  
-  useEffect(() => {
-    // About page content has been moved to the homepage, so redirect there
-    router.push('/', { replace: true });
-  }, [navigate]);
-
-  // This renders temporarily during redirect
+  // Restore basic About page structure
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <> {/* Use Fragment instead of div wrapper */}
       <SEO 
         title="About - AI Automation Ally | Expert Consultant" 
         description="Learn about my 10+ years of experience helping businesses leverage AI and automation technology to reduce costs, streamline operations, and drive growth."
       />
       
-      <Navbar />
+      {/* <Navbar /> */} {/* Removed */}
       
-      <main className="flex-grow pt-20">
-        <div className="container mx-auto py-20 text-center">
-          <h1 className="text-3xl font-bold mb-6">Redirecting to Home Page...</h1>
-          <p>The about page content has been integrated into our homepage.</p>
-        </div>
+      <main className="flex-grow pt-16"> {/* Adjust padding if needed */}
+        {/* Placeholder for actual About page content */}
+        {/* Assuming components like AboutHero, SkillsTechnologies, BackgroundCTA exist */}
+        <AboutHero />
+        <SkillsTechnologies />
+        <BackgroundCTA />
+        {/* Add other relevant sections here */}
       </main>
       
-      <Footer />
-    </div>
+      {/* <Footer /> */} {/* Removed */}
+    </>
   );
 };
 

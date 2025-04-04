@@ -1,3 +1,4 @@
+"use client"; // Added "use client" directive
 
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -11,12 +12,12 @@ const ChatbotAnimation: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="text-center"
     >
-      <motion.div 
+      <motion.div
         className="inline-block"
-        animate={{ 
+        animate={{
           rotate: [0, 10, -10, 10, 0],
         }}
-        transition={{ 
+        transition={{
           repeat: Infinity,
           repeatType: "mirror",
           duration: 2,
@@ -24,7 +25,7 @@ const ChatbotAnimation: React.FC = () => {
       >
         <MessageSquare className="w-10 h-10 text-black dark:text-white" />
       </motion.div>
-      <motion.div 
+      <motion.div
         className="mt-1 h-1 w-16 mx-auto bg-black/30 dark:bg-white/30 rounded-full"
         animate={{
           width: [40, 60, 40]

@@ -28,7 +28,7 @@ const TitleSection: React.FC<TitleSectionProps> = ({
       <AnimatedText
         text={description}
         tag="p"
-        delay={200}
+        
         className="text-lg text-muted-foreground"
       />
     </div>

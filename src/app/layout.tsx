@@ -1,29 +1,34 @@
 import "@/styles/globals.css";
-import { Inter } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import type { Metadata } from "next";
+import { Inter } from 'next/font/google';
+import { Metadata } from 'next';
+import ClientRootLayout from '@/components/ClientRootLayout';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import Chat from '@/components/chat/Chat';
 
-// Configure the Inter font
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Farzad Bayat – AI Consulting & Courses",
-  description: "Personal portfolio, AI services, and educational content by Farzad Bayat."
+  title: 'FB Consulting - AI Automation Solutions',
+  description: 'Specialized AI consulting for businesses looking to automate processes and reduce costs',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
-      <body className="antialiased min-h-screen flex flex-col bg-white text-gray-900">
-        <Header />
-        <main className="flex-1 container mx-auto px-4 py-8">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-background text-foreground`}>
+        <ClientRootLayout>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+          <Chat />
+        </ClientRootLayout>
       </body>
     </html>
   );

@@ -1,19 +1,48 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { MobileNav } from "@/components/MobileNav";
 
 export default function Header() {
+  const pathname = usePathname();
+
+  const navigation = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "About", href: "/about" },
+    { name: "Chat", href: "/chat" },
+    { name: "Contact", href: "/contact" },
+  ];
+
   return (
-    <header className="w-full border-b py-4">
-      <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-tight text-gray-900">
-          Farzad Bayat
-        </Link>
-        <nav className="space-x-6 text-sm font-medium text-gray-700">
-          <Link href="/about" className="hover:text-black">About</Link>
-          <Link href="/services" className="hover:text-black">Services</Link>
-          <Link href="/courses" className="hover:text-black">Courses</Link>
-          <Link href="/resources" className="hover:text-black">Resources</Link>
-          <Link href="/contact" className="hover:text-black">Contact</Link>
-        </nav>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center">
+        <MobileNav />
+        <div className="mr-4 hidden md:flex flex-1">
+          <Link href="/" className="mr-6 flex items-center space-x-2">
+            <span className="font-bold">Farzad Bayat</span>
+          </Link>
+          <nav className="flex items-center space-x-6 text-sm font-medium">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`transition-colors hover:text-foreground/80 ${
+                  pathname === item.href ? "text-foreground" : "text-foreground/60"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="flex items-center">
+          <Button asChild>
+            <Link href="/contact">Book a Call</Link>
+          </Button>
+        </div>
       </div>
     </header>
   );

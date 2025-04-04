@@ -1,5 +1,5 @@
-import { Metadata } from "next";
-import { ContactSection } from "@/components/contact/ContactSection";
+import type { Metadata } from 'next'; // Import Metadata type
+import ContactSection from "@/components/contact/ContactSection";
 
 export const metadata: Metadata = {
   title: "Contact | FB Consulting",
@@ -7,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactSection />;
+  return (
+    <main>
+      <ContactSection />
+    </main>
+  );
 }

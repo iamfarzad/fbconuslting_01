@@ -3,8 +3,10 @@ import { HelmetProvider } from "react-helmet-async";
 import ErrorBoundaryWrapper from '@/components/ErrorBoundaryWrapper';
 import ThemeProvider from '@/components/ThemeProvider';
 import { LanguageProvider } from '@/contexts/LanguageContext';
-import { CopilotProvider } from "@/components/copilot/CopilotProvider";
-import { GeminiAPIProvider } from '@/providers/GeminiAPIProvider';
+// Remove old providers
+// import { CopilotProvider } from "@/components/copilot/CopilotProvider";
+// import { GeminiAPIProvider } from '@/providers/GeminiAPIProvider';
+import { ChatProvider } from '@/providers/chat/ChatProvider'; // Import the new provider
 
 interface ProvidersWrapperProps {
   children: React.ReactNode;
@@ -22,15 +24,10 @@ const ProvidersWrapper: React.FC<ProvidersWrapperProps> = ({ children }) => {
           <ErrorBoundaryWrapper>
             <LanguageProvider>
               <ErrorBoundaryWrapper>
-                <CopilotProvider>
-                  <ErrorBoundaryWrapper>
-                    <GeminiAPIProvider>
-                      <ErrorBoundaryWrapper>
-                        {children}
-                      </ErrorBoundaryWrapper>
-                    </GeminiAPIProvider>
-                  </ErrorBoundaryWrapper>
-                </CopilotProvider>
+                {/* Replace old providers with the new ChatProvider */}
+                <ChatProvider>
+                  {children}
+                </ChatProvider>
               </ErrorBoundaryWrapper>
             </LanguageProvider>
           </ErrorBoundaryWrapper>

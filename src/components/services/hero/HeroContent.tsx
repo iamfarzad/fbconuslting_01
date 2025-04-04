@@ -1,8 +1,8 @@
 
 import React from 'react';
 import AnimatedText from '@/components/AnimatedText';
-import HeroBadge from '@/components/services/hero/HeroBadge';
-import HeroActions from '@/components/services/hero/HeroActions';
+import HeroBadge from './HeroBadge';
+import HeroActions from './HeroActions';
 
 const HeroContent = () => {
   return (
@@ -19,7 +19,7 @@ const HeroContent = () => {
           text="With AI Automation" 
           className="text-gradient-teal block" 
           tag="span"
-          delay={100}
+          // Removed invalid delay prop
         />
       </h1>
       

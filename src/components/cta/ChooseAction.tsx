@@ -1,8 +1,8 @@
 import React from 'react';
-import { useGeminiCopilot } from '@/components/copilot/GeminiCopilotProvider';
+import { useChat } from '@/providers/chat/ChatProvider'; // Import the unified hook
 
 export default function ChooseAction() {
-  const { setStep } = useGeminiCopilot();
+  const { setStep } = useChat(); // Use the unified hook
 
   return (
     <div className="max-w-md mx-auto text-center space-y-6">

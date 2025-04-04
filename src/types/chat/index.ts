@@ -1,17 +1,28 @@
 export interface ChatMessage {
   id: string;
-  role: "user" | "assistant" | "system";
+  role: 'user' | 'assistant' | 'system';
   content: string;
   timestamp?: number;
 }
 
+export type ConnectionStatus = 'connected' | 'connecting' | 'disconnected' | 'error';
+
 export interface ConnectionStatusIndicatorProps {
-  status: "connected" | "connecting" | "disconnected" | "error";
+  status: ConnectionStatus;
   className?: string;
 }
 
-export interface AIMessage {
-  id: string;
-  content: string;
-  role: string;
+export interface ChatConfig {
+  apiKey?: string;
+  model?: string;
+  temperature?: number;
+  maxTokens?: number;
+  systemPrompt?: string;
+}
+
+export interface ChatOptionsProps {
+  onRegenerate?: () => void;
+  onClear?: () => void;
+  onCopy?: () => void;
+  isMobile?: boolean;
 }

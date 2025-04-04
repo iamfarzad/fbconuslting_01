@@ -1,66 +1,60 @@
-
-import React from 'react';
-import { useLocationDetection } from '@/hooks/useLocationDetection';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 import { MapPin } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LocationGreetingProps {
   className?: string;
 }
 
-const LocationGreeting: React.FC<LocationGreetingProps> = ({ className = "" }) => {
-  const { city, isLoading } = useLocationDetection();
-  const { t, language } = useLanguage();
-  
-  // Create greeting based on location and language
-  const getGreeting = () => {
-    if (city) {
-      return t('greeting_city').replace('{{city}}', city);
-    }
+const LocationGreeting: React.FC<LocationGreetingProps> = ({ className }) => {
+  const [locationData, setLocationData] = useState<{
+    city?: string;
+    country?: string;
+    timezone?: string;
+    greeting?: string;
+  }>({});
+
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
+        // Use a geolocation API (e.g. ipinfo.io, ipapi.co)
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        
+        // Get time-appropriate greeting
+        const hour = new Date().getHours();
+        let greeting = 'Hello';
+        
+        if (hour < 12) greeting = 'Good morning';
+        else if (hour < 18) greeting = 'Good afternoon';
+        else greeting = 'Good evening';
+        
+        setLocationData({
+          city: data.city,
+          country: data.country_name,
+          timezone: data.timezone,
+          greeting
+        });
+      } catch (error) {
+        console.error('Error fetching location data:', error);
+        setLocationData({
+          greeting: 'Hello'
+        });
+      }
+    };
     
-    // Fall back to time-based greeting
-    const hour = new Date().getHours();
-    if (hour < 12) {
-      return t('greeting_morning');
-    } else if (hour < 17) {
-      return t('greeting_afternoon');
-    } else {
-      return t('greeting_evening');
-    }
-  };
+    fetchLocation();
+  }, []);
+
+  if (!locationData.city) {
+    return <div className={className}>Welcome to Farzad Bayat Consulting</div>;
+  }
 
   return (
-    <div className={`${className}`}>
-      <motion.div 
-        className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-futuristic"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        {city && (
-          <motion.div 
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.3, type: "spring" }}
-            className={`text-muted-foreground ${language === 'no' ? "text-red-500" : ""}`}
-          >
-            <MapPin className="h-5 w-5" />
-          </motion.div>
-        )}
-        <h2>{getGreeting()}</h2>
-      </motion.div>
-      
-      {language === 'no' && (
-        <motion.p 
-          className="text-sm text-accent-foreground mt-2 sm:mt-1"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.4 }}
-        >
-          {isLoading ? "Oppdager plassering..." : "AI-løsninger for norske bedrifter"}
-        </motion.p>
-      )}
+    <div className={`flex items-center justify-center gap-1.5 ${className}`}>
+      <MapPin className="w-3 h-3" />
+      <span>
+        {locationData.greeting} from {locationData.city}, {locationData.country}
+      </span>
     </div>
   );
 };

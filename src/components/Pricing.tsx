@@ -1,10 +1,13 @@
+
+"use client"; // Add use client directive
+
 import React from 'react';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
-import AnimatedText from '@/components/AnimatedText';
-import { useRouter } from 'next/navigation';
-import { trackEvent } from '@/services/analyticsService';
+import AnimatedText from './AnimatedText';
+import { useRouter } from 'next/navigation'; // Import useRouter from next/navigation
+import { trackEvent } from '@/services/analyticsService'; // Assuming this path is correct
 
 const pricingData = [
   {
@@ -46,7 +49,7 @@ const pricingData = [
 ];
 
 const Pricing = () => {
-  const navigate = useRouter();
+  const router = useRouter(); // Use useRouter hook
   
   const handlePricingCTA = (plan: string, cta: string) => {
     trackEvent({
@@ -57,7 +60,7 @@ const Pricing = () => {
       cta_text: cta
     });
     
-    router.push('/contact');
+    router.push('/contact'); // Use router.push for navigation
   };
   
   return (
@@ -72,7 +75,7 @@ const Pricing = () => {
           <AnimatedText
             text="Transparent pricing to fit your AI automation needs"
             tag="p"
-            delay={200}
+            // delay={200} // Removed invalid delay prop
             className="text-xl text-muted-foreground max-w-2xl mx-auto"
           />
         </div>

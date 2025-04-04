@@ -1,4 +1,6 @@
 
+"use client"; // Add this directive
+
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ShadcnblocksNavbarDemo } from '@/components/ui/shadcnblocks-navbar-demo';

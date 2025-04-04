@@ -1,40 +1,15 @@
 
-"use client";
+"use client"; // Add this directive
 
 import React from 'react';
 import { motion } from 'framer-motion';
 import AnimatedText from '@/components/AnimatedText';
-import { Testimonial } from '@/types/blog';
-import EnhancedTestimonialCard from '@/components/testimonials/EnhancedTestimonialCard';
+// import { Testimonial } from '@/types/blog'; // Type is inferred from imported data
+import EnhancedTestimonialCard from './EnhancedTestimonialCard';
 import { MessageSquareQuote } from 'lucide-react';
+import { testimonials } from '@/data/testimonialsData'; // Import data
 
-// Enhanced testimonial data with more details
-const testimonialData: Testimonial[] = [
-  {
-    id: '1',
-    name: 'Sarah Johnson',
-    company: 'TechInnovate',
-    role: 'CTO',
-    content: "The AI automation solutions provided have revolutionized our customer service. Response times dropped by 65% and customer satisfaction scores are at an all-time high. The implementation was smooth and the ongoing support has been exceptional.",
-    rating: 5
-  },
-  {
-    id: '2',
-    name: 'Michael Chen',
-    company: 'FinanceFlow',
-    role: 'Operations Director',
-    content: "What previously took our team days to complete now happens in minutes. Our operations are running 10x faster with far fewer errors. The AI workflow automation has completely transformed how we process financial data and reports.",
-    rating: 5
-  },
-  {
-    id: '3',
-    name: 'Alicia Rodriguez',
-    company: 'RetailPro',
-    role: 'Marketing Manager',
-    content: "The AI-powered marketing insights have been a game changer. We've increased our conversion rates by 40% by targeting the right customers with the right offers at the right time. The data analytics capabilities are truly impressive.",
-    rating: 4
-  }
-];
+// Removed hardcoded testimonialData
 
 interface TestimonialsProps {
   id?: string;
@@ -45,7 +20,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ id }) => {
     <section id={id} className="py-24 relative z-10 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background/40 pointer-events-none" />
-      <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzAgMzBoMzB2MzBIMzB6IiBmaWxsPSJjdXJyZW50Q29sb3IiIG9wYWNpdHk9Ii4yIi8+PC9nPjwvc3ZnPg==')]" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
       
       <div className="container mx-auto max-w-6xl px-4">
         <motion.div 
@@ -80,8 +55,8 @@ const Testimonials: React.FC<TestimonialsProps> = ({ id }) => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonialData.map((testimonial, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> {/* Reduced gap from 8 to 6 */}
+          {testimonials.map((testimonial, index) => ( // Use imported testimonials data
             <motion.div
               key={testimonial.id}
               initial={{ opacity: 0, y: 30 }}

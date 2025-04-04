@@ -1,12 +1,15 @@
+
+"use client"; // Add use client directive
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import AnimatedText from '@/components/AnimatedText';
+import AnimatedText from '@/components/AnimatedText'; // Assuming this path is correct
 import { Check, ArrowRight } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { trackEvent } from '@/services/analyticsService';
+import { useRouter } from 'next/navigation'; // Import useRouter
+import { trackEvent } from '@/services/analyticsService'; // Assuming this path is correct
 
 const BusinessChallenges = () => {
-  const navigate = useRouter();
+  const router = useRouter(); // Use useRouter hook
   
   const challenges = [
     { problem: "Wasting time on manual tasks?", solution: "Automate to save 20+ hours per week" },
@@ -25,7 +28,7 @@ const BusinessChallenges = () => {
       cta_location: 'business_challenges_section'
     });
     
-    router.push('/contact');
+    router.push('/contact'); // Use router.push for navigation
   };
 
   return (
