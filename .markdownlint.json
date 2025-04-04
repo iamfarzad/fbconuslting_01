@@ -1,0 +1,11 @@
+{
+  "default": true,
+  "no-inline-html": false,
+  "line-length": false,
+  "first-line-h1": false,
+  "no-trailing-punctuation": false,
+  "no-duplicate-heading": false,
+  "code-block-style": false,
+  "extends": "relaxed",
+  "ignores": ["**/package.json"]
+}
