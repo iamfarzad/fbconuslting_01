@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { SendMessageButton } from '@/components/chat/core/controls/SendMessageButton';
-import { VoiceButton } from '@/components/chat/core/controls/VoiceButton';
+// import { VoiceButton } from '@/components/chat/core/controls/VoiceButton'; // Removed import - Handled in Chat.tsx
 import { ClearChatButton } from '@/components/chat/core/controls/ClearChatButton';
 import { ImageUploadButton } from '@/components/chat/core/controls/ImageUploadButton';
 import { useRef } from 'react';
@@ -83,17 +83,17 @@ export const InputControls: React.FC<InputControlsProps> = ({
             />
           </>
         )}
-      
-        {/* Voice button */}
-        {onToggleMic && isVoiceSupported && (
-          <VoiceButton 
-            isListening={isListening} 
-            onToggle={onToggleMic} 
+
+        {/* Voice button - Functionality moved to Chat.tsx */}
+        {/* {onToggleMic && isVoiceSupported && (
+          <VoiceButton
+            isListening={isListening}
+            onToggle={onToggleMic}
             isLoading={isLoading || aiProcessing}
             isVoiceSupported={isVoiceSupported}
           />
-        )}
-        
+        )} */}
+
         {/* Clear chat button */}
         {onClearChat && (
           <ClearChatButton 

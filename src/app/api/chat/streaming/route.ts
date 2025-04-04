@@ -99,7 +99,7 @@ async function streamResponse(body: ChatRequestBody, writer: WritableStreamDefau
     const prompt = `${SYSTEM_INSTRUCTION}\n\nConversation history:${formattedHistory}\n\nUser's new message: ${body.message}\n\nRespond as Farzad-AI:`;
     
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:streamGenerateContent?key=${API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-pro:streamGenerateContent?key=${API_KEY}`,
       {
         method: 'POST',
         headers: {
