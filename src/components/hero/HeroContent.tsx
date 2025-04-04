@@ -1,41 +1,43 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Flag } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalization } from '@/hooks/useLocalization'; // Use the correct hook
 import LocationGreeting from '@/components/LocationGreeting';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { HeroActions } from '@/components/hero/HeroActions';
-import { HeroVoiceInput } from '@/components/hero/HeroVoiceInput';
+import { HeroActions } from './HeroActions';
+// Removed import for missing HeroVoiceInput
 
-interface HeroContentProps {
-  chatInputValue: string;
-  isListening: boolean;
-  transcript: string;
-  toggleListening: () => void;
-  isVoiceSupported: boolean;
-  isTranscribing: boolean;
-  useGeminiApi: boolean;
-  onInputChange?: (value: string) => void;
-}
+// Interface is no longer needed as the component takes no props
+// interface HeroContentProps {
+// }
 
-export const HeroContent: React.FC<HeroContentProps> = ({
-  chatInputValue,
-  isListening,
-  transcript,
-  toggleListening,
-  isVoiceSupported,
-  isTranscribing,
-  useGeminiApi,
-  onInputChange
-}) => {
-  const { t, language } = useLanguage();
+// Component signature updated to accept no props
+export const HeroContent: React.FC = () => {
+  const { getLocalizedContent, language } = useLocalization(); // Use the correct hook and function
   const isNorwegian = language === 'no';
+
+  // Define content object for getLocalizedContent
+  const content = {
+    norway_focused: {
+      en: "Norway Focused", // Assuming English fallback
+      no: "Norge Fokusert" // Assuming Norwegian text
+    },
+    norway_title: {
+      en: "How can AI automation help your business?", // English fallback
+      no: "Hvordan kan AI-automatisering hjelpe din bedrift?" // Assuming Norwegian title
+    },
+    hero_subtitle: {
+      en: "Ask me anything about AI automation, workflow optimization, or how to reduce costs with intelligent systems",
+      no: "Spør meg om AI-automatisering, arbeidsflytoptimalisering, eller hvordan redusere kostnader med intelligente systemer" // Assuming Norwegian subtitle
+    }
+  };
+
 
   return (
     <div className="container mx-auto max-w-4xl relative z-10 mt-10 md:mt-0">
       <div className="absolute top-0 right-0 md:right-4 flex items-center gap-3">
-        <LanguageSwitcher variant="dropdown" />
+        {/* Removed invalid variant prop */}
+        <LanguageSwitcher />
       </div>
       
       <div className="text-center mb-6">
@@ -51,7 +53,8 @@ export const HeroContent: React.FC<HeroContentProps> = ({
             transition={{ duration: 0.3 }}
           >
             <Flag className="w-4 h-4 text-red-600" />
-            <span className="text-sm font-medium text-foreground dark:text-white">{t('norway_focused')}</span>
+            {/* Use getLocalizedContent */}
+            <span className="text-sm font-medium text-foreground dark:text-white">{getLocalizedContent(content.norway_focused)}</span>
           </motion.div>
         )}
         
@@ -63,7 +66,8 @@ export const HeroContent: React.FC<HeroContentProps> = ({
         >
           {isNorwegian ? (
             <span className="relative">
-              {t('norway_title')}
+              {/* Use getLocalizedContent */}
+              {getLocalizedContent(content.norway_title)}
               <motion.span
                 className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-red-600 via-white to-blue-600 opacity-80"
                 initial={{ scaleX: 0 }}
@@ -80,19 +84,11 @@ export const HeroContent: React.FC<HeroContentProps> = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          {isNorwegian ? t('hero_subtitle') : "Ask me anything about AI automation, workflow optimization, or how to reduce costs with intelligent systems"}
+          {/* Use getLocalizedContent */}
+          {getLocalizedContent(content.hero_subtitle)}
         </motion.p>
         
-        <HeroVoiceInput 
-          chatInputValue={chatInputValue}
-          isListening={isListening}
-          transcript={transcript}
-          toggleListening={toggleListening}
-          isVoiceSupported={isVoiceSupported}
-          isTranscribing={isTranscribing}
-          useGeminiApi={useGeminiApi}
-          onInputChange={onInputChange}
-        />
+        {/* Removed missing HeroVoiceInput component */}
         
         <HeroActions />
       </div>

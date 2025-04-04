@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { AnimatedGridPattern } from '@/components/ui/animated-grid-pattern';
+import { AnimatedGridPattern } from '@/components/ui/animated-grid-pattern'; // Need to check if this exists
 
 export const HeroBackground: React.FC = () => {
   return (

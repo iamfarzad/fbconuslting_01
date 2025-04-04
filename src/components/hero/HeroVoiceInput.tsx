@@ -8,6 +8,7 @@ interface HeroVoiceInputProps {
   chatInputValue?: string;
   onInputChange?: (value: string) => void;
   useGeminiApi?: boolean;
+  transcript?: string;
 }
 
 export const HeroVoiceInput: React.FC<HeroVoiceInputProps> = ({
@@ -17,7 +18,8 @@ export const HeroVoiceInput: React.FC<HeroVoiceInputProps> = ({
   isTranscribing = false,
   chatInputValue = "",
   onInputChange,
-  useGeminiApi = false
+  useGeminiApi = false,
+  transcript = ""
 }) => {
   if (!isVoiceSupported) return null;
   
@@ -50,6 +52,12 @@ export const HeroVoiceInput: React.FC<HeroVoiceInputProps> = ({
       {isTranscribing && (
         <div className="absolute top-full mt-2 right-0 bg-white p-2 rounded shadow-lg text-sm">
           Transcribing...
+        </div>
+      )}
+      
+      {transcript && (
+        <div className="absolute top-full mt-2 right-0 bg-white p-2 rounded shadow-lg text-sm max-w-xs truncate">
+          {transcript}
         </div>
       )}
       

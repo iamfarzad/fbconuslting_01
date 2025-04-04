@@ -1,8 +1,17 @@
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { GeminiAdapter } from '@/features/gemini/services/geminiAdapter';
 
 export function HeroChat() {
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  const adapter = useMemo(() => {
+    if (!apiKey) {
+      console.error('Gemini API key is missing.');
+      return null;
+    }
+    return new GeminiAdapter(apiKey);
+  }, [apiKey]);
+
   const [message, setMessage] = useState('');
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -11,12 +20,17 @@ export function HeroChat() {
     e.preventDefault();
     if (!message.trim()) return;
 
+    if (!adapter) {
+      setResponse('Configuration error: Cannot connect to the chat service.');
+      return;
+    }
+
     setIsLoading(true);
     try {
-      const result = await GeminiAdapter.generateResponse({
-        prompt: message
-      });
-      setResponse(result.text);
+      // Note: The original code passed an object { prompt: message },
+      // but the adapter expects just the prompt string. Adjusting the call.
+      const resultText = await adapter.generateResponse(message);
+      setResponse(resultText); // Assuming the adapter returns the text directly
       setMessage('');
     } catch (error) {
       console.error('Chat error:', error);
