@@ -1,10 +1,10 @@
 
 import React from 'react';
-import StepsList from '@/components/courses/StepsList';
+import StepsList from '../StepsList';
 import { 
   AdvancedStep1, AdvancedStep2, AdvancedStep3, AdvancedStep4,
   AdvancedStep5, AdvancedStep6, AdvancedStep7, AdvancedStep8
-} from '@/components/courses/advanced/AdvancedStepItems';
+} from './AdvancedStepItems';
 
 const AdvancedStepsList = () => {
   const totalSteps = 8;

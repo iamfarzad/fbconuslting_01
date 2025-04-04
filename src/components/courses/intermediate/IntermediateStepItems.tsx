@@ -11,7 +11,7 @@ import {
   IntermediateStep8,
   IntermediateStep9,
   IntermediateStep10
-} from '@/components/courses/intermediate/steps';
+} from './steps';
 
 export {
   IntermediateStep1,

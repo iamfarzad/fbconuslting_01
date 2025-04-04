@@ -1,44 +1,49 @@
-import React from 'react';
 
-interface Step {
-  id: string;
-  title: string;
-  description: string;
-}
+"use client"; // Add the directive here
+
+import React, { useState, useEffect } from 'react';
+import { Progress } from '@/components/ui/progress';
 
 interface StepsListProps {
-  steps?: Step[];
-  children?: React.ReactNode;
-  onSelectStep?: (stepId: string) => void;
-  currentStepId?: string;
-  totalSteps?: number;
+  totalSteps: number;
+  children: React.ReactNode;
 }
 
-const StepsList: React.FC<StepsListProps> = ({ 
-  steps = [],
-  children,
-  onSelectStep,
-  currentStepId,
-  totalSteps
-}) => {
-  if (children) {
-    return <div className="space-y-4">{children}</div>;
-  }
+const StepsList = ({ totalSteps, children }: StepsListProps) => {
+  const [completedSteps, setCompletedSteps] = useState<{[key: number]: boolean}>({});
+  const [progress, setProgress] = useState(0);
   
+  const handleMarkComplete = (stepNumber: number, isComplete: boolean) => {
+    setCompletedSteps(prev => ({
+      ...prev,
+      [stepNumber]: isComplete
+    }));
+  };
+  
+  useEffect(() => {
+    const completedCount = Object.values(completedSteps).filter(Boolean).length;
+    setProgress(Math.round((completedCount / totalSteps) * 100));
+  }, [completedSteps, totalSteps]);
+
   return (
-    <div className="space-y-4">
-      {steps.map((step) => (
-        <div 
-          key={step.id}
-          className={`p-4 border rounded-lg cursor-pointer hover:border-primary transition-colors ${
-            currentStepId === step.id ? 'border-primary bg-primary/5' : 'border-gray-200'
-          }`}
-          onClick={() => onSelectStep?.(step.id)}
-        >
-          <h3 className="font-medium">{step.title}</h3>
-          <p className="text-sm text-gray-600 mt-1">{step.description}</p>
+    <div className="space-y-6">
+      <div className="mb-8">
+        <div className="flex justify-between mb-2">
+          <span className="text-sm font-medium">Your progress: {progress}% complete</span>
+          <span className="text-sm text-muted-foreground">{Object.values(completedSteps).filter(Boolean).length}/{totalSteps} steps</span>
         </div>
-      ))}
+        <Progress value={progress} className="h-2" />
+      </div>
+      
+      {React.Children.map(children, child => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, {
+            onMarkComplete: handleMarkComplete,
+            completed: completedSteps[child.props.number] || false
+          } as any);
+        }
+        return child;
+      })}
     </div>
   );
 };

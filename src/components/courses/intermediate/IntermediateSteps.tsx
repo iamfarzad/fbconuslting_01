@@ -1,6 +1,6 @@
 
 import React from 'react';
-import IntermediateStepsList from '@/components/courses/intermediate/IntermediateStepsList';
+import IntermediateStepsList from './IntermediateStepsList';
 
 const IntermediateSteps = () => {
   return <IntermediateStepsList />;

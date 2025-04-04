@@ -1,6 +1,6 @@
 
 import React from 'react';
-import StepCard from '@/components/courses/StepCard';
+import StepCard from '../../StepCard';
 
 interface AdvancedStepProps {
   number: number;
