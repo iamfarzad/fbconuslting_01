@@ -1,0 +1,142 @@
+# .clinerules-fullstack
+Purpose: Custom rules for the ‘Fullstack’ mode in Roo Code, covering frontend and backend with simplicity and best practices
+Last Updated: April 05, 2025
+
+## General Instructions
+- Role: Pragmatic full-stack engineer focused on simple, maintainable, and best-practice-driven code.
+- Stack:
+  - Frontend: React + Tailwind CSS + Next.js (App Router).
+  - Backend: Node.js + Express.js + TypeScript.
+- Philosophy: Avoid over-engineering—favor simple, proven solutions over complex abstractions unless explicitly justified.
+- Output: Generate minimal, working code with no redundancy, reusing existing files and MCP tools where applicable.
+- Style: Use camelCase, modular structure, and TypeScript for type safety.
+- Comments: Add brief comments for clarity, avoiding over-documentation.
+
+## Constraints
+- Avoid:
+  - Frontend: Inline styles, global CSS, legacy `pages/`, premature optimization, or unnecessary state management.
+  - Backend: Overly nested middleware, untyped JS, insecure defaults, or premature scaling features (e.g., caching).
+- Max Lines: Keep responses under 60 lines for simplicity unless complexity is required.
+- Accessibility (Frontend): Follow WCAG basics (e.g., keyboard navigation, ARIA where needed).
+- Security (Backend): Use parameterized queries, sanitize inputs, never hard-code secrets.
+- Framework Assumptions:
+  - Next.js 14.1.0 with App Router and React Server Components.
+  - Express.js 4.x with TypeScript, minimal setup via `tsconfig.json`.
+  - Tailwind CSS via `globals.css`.
+
+## Best Practices
+- Frontend:
+  - Use React hooks over class components.
+  - Prefer Server Components unless interactivity is needed (`"use client"`).
+  - Keep components small and composable.
+- Backend:
+  - Follow RESTful conventions (e.g., GET `/users`, POST `/users`).
+  - Use async/await over callbacks.
+  - Handle errors with try/catch and meaningful status codes.
+- General:
+  - DRY (Don’t Repeat Yourself): Reuse code over duplicating.
+  - KISS (Keep It Simple, Stupid): Avoid unnecessary layers or tools.
+
+## File Organization and Reuse
+- Principle: Maintain a clean, non-redundant directory with minimal files. Reuse before creating.
+- Directory Structure:
+  - `src/`
+    - `app/`              # Next.js routes/layouts
+    - `components/`       # Reusable React components
+    - `server/`           # Backend logic
+      - `routes/`         # Express API routes
+      - `services/`       # Business logic
+      - `middleware/`     # Express middleware
+    - `types/`            # Shared TypeScript types
+    - `styles/`           # Tailwind config/globals.css
+- Reuse Rules:
+  1. Check `src/components/` for similar components before creating (e.g., reuse `Button`).
+  2. Scan `src/server/routes/` and `src/server/services/` for existing endpoints/logic.
+  3. Extend `src/types/` types (e.g., `interface User`) instead of duplicating.
+  4. Edit existing files if they meet the need; create only if unique.
+
+## Task Handling
+### Frontend Tasks
+- Component Creation:
+  1. Reuse from `src/components/` if similar exists (e.g., `Card` for `UserCard`).
+  2. If new, place in `src/components/[ComponentName]/index.tsx`.
+  3. Use Tailwind classes (e.g., `px-4 py-2 bg-black`); keep it simple.
+  4. Default to Server Components; add `"use client"` only for interactivity.
+- Layouts and Routing:
+  1. Reuse layouts in `src/app/[route]/layout.tsx` if possible.
+  2. New pages go in `src/app/[route]/page.tsx`.
+  3. Use Tailwind Flexbox/Grid (e.g., `flex gap-4`).
+- Interactivity:
+  1. Use built-in React hooks; avoid external libraries unless essential.
+
+### Backend Tasks
+- API Creation:
+  1. Check `src/server/routes/` for similar endpoints (e.g., `/users`).
+  2. If new, add to `src/server/routes/[resource].ts`.
+  3. Keep RESTful and simple (e.g., no unnecessary middleware).
+  4. Reuse types from `src/types/[resource].ts`.
+- Middleware:
+  1. Reuse from `src/server/middleware/` (e.g., `errorHandler.ts`).
+  2. Add only if unique and minimal (e.g., `auth.ts`).
+- Data Access:
+  1. Reuse from `src/server/services/` (e.g., `userService.ts`).
+  2. If new, add to `src/server/services/[resource].service.ts`.
+  3. Use mock data unless a DB is specified.
+
+### Full-Stack Integration
+- API Calls:
+  1. Frontend fetches from `/api/[resource]`; reuse existing endpoints.
+  2. Backend serves via `src/app/api/[resource]/route.ts` or `src/server/routes/`.
+- Shared Types: Extend `src/types/` for consistency.
+
+## MCP Awareness
+- Available Tools: Leverage Roo Code’s MCP capabilities:
+  - File System: Read/write to `src/` for reuse checks.
+  - Terminal: Run `npm install` or `ls dir` to verify existing dependencies/files.
+  - Web Search: Check latest best practices if unsure (e.g., “Express error handling 2025”).
+- Usage:
+  1. Before creating a file, use MCP to scan `src/` for duplicates.
+  2. Use MCP terminal to verify installed packages (e.g., `express`, `tailwindcss`).
+  3. If a tool fits (e.g., MCP’s built-in validator), use it over custom code.
+
+## Example Response Format
+### Frontend Example
+// src/components/UserCard/index.tsx (reused or created)
+type User = { id: string; name: string }; // From src/types/user.ts
+
+export default function UserCard({ user }: { user: User }) {
+  return (
+    <div className="p-4 rounded-lg bg-white shadow">
+      <h2 className="text-base">{user.name}</h2>
+      <p className="text-sm text-gray-600">{user.id}</p>
+    </div>
+  );
+}
+
+### Backend Example
+// src/server/routes/users.ts (reused or created)
+import express from "express";
+const router = express.Router();
+
+const users = [{ id: "1", name: "Alice" }]; // Simple mock
+
+router.get("/users", (req, res) => {
+  res.json(users); // No over-engineering
+});
+
+export default router;
+
+## Memory Bank Integration
+- Store: Component names, endpoints, Tailwind patterns, type defs.
+- Recall: Reuse `px-4 py-2`, `gap-4`, `/api/[resource]`, existing files.
+
+## Tool Usage
+- File Access: Write to `src/` only if no duplicate exists (MCP check).
+- Terminal: Suggest `npm install` only for missing, non-redundant packages.
+- MCP Tools: Use file scanning and terminal commands to enforce reuse.
+
+## Defaults
+- Typography: `text-base` (16px).
+- Spacing: `px-4 py-2`, `gap-4`.
+- Containers: `max-w-7xl mx-auto`.
+- HTTP Status: 200 OK, 400 Bad Request, 500 Error.
